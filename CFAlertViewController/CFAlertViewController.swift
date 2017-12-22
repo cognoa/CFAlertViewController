@@ -184,8 +184,10 @@ open class CFAlertViewController: UIViewController    {
     // MARK: Private / Internal
     internal var titleString: String?
     internal var titleColor: UIColor = CFAlertViewController.CF_ALERT_DEFAULT_TITLE_COLOR()
+    internal var titleFont: UIFont?
     internal var messageString: String?
     internal var messageColor: UIColor = CFAlertViewController.CF_ALERT_DEFAULT_MESSAGE_COLOR()
+    internal var messageFont: UIFont?
     internal var actionList = [CFAlertAction]()
     internal var dismissHandler: CFAlertViewControllerDismissBlock?
     internal var keyboardHeight: CGFloat = 0.0   {
@@ -234,8 +236,10 @@ open class CFAlertViewController: UIViewController    {
         
         return CFAlertViewController.alertController(title: title,
                                                      titleColor: nil,
+                                                     titleFont: nil,
                                                      message: message,
                                                      messageColor: nil,
+                                                     messageFont: nil,
                                                      textAlignment: textAlignment,
                                                      preferredStyle: preferredStyle,
                                                      headerView: nil,
@@ -256,8 +260,10 @@ open class CFAlertViewController: UIViewController    {
         // Create New Instance Of Alert Controller
         return CFAlertViewController.init(title: title,
                                           titleColor: titleColor,
+                                          titleFont: nil,
                                           message: message,
                                           messageColor: messageColor,
+                                          messageFont: nil,
                                           textAlignment: textAlignment,
                                           preferredStyle: preferredStyle,
                                           headerView: headerView,
@@ -265,6 +271,40 @@ open class CFAlertViewController: UIViewController    {
                                           didDismissAlertHandler: dismiss)
     }
     
+    @objc public class func alertController(title: String?,
+                                            titleColor: UIColor?,
+                                            titleFont: UIFont?,
+                                            message: String?,
+                                            messageColor: UIColor?,
+                                            messageFont: UIFont?,
+                                            textAlignment: NSTextAlignment,
+                                            preferredStyle: CFAlertControllerStyle,
+                                            headerView: UIView?,
+                                            footerView: UIView?,
+                                            didDismissAlertHandler dismiss: CFAlertViewControllerDismissBlock?) -> CFAlertViewController {
+
+        // Create New Instance Of Alert Controller
+        return CFAlertViewController.init(title: title,
+                                          titleColor: titleColor,
+                                          titleFont: titleFont,
+                                          message: message,
+                                          messageColor: messageColor,
+                                          messageFont: messageFont,
+                                          textAlignment: textAlignment,
+                                          preferredStyle: preferredStyle,
+                                          headerView: headerView,
+                                          footerView: footerView,
+                                          didDismissAlertHandler: dismiss)
+    }
+
+    @objc public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+
+    @objc public required convenience init?(coder aDecoder: NSCoder) {
+        self.init(coder: aDecoder)
+    }
+
     @objc public convenience init(title: String?,
                                   message: String?,
                                   textAlignment: NSTextAlignment,
@@ -274,8 +314,10 @@ open class CFAlertViewController: UIViewController    {
         // Create New Instance Of Alert Controller
         self.init(title: title,
                   titleColor: nil,
+                  titleFont: nil,
                   message: message,
                   messageColor: nil,
+                  messageFont: nil,
                   textAlignment: textAlignment,
                   preferredStyle: preferredStyle,
                   headerView: nil,
@@ -292,7 +334,30 @@ open class CFAlertViewController: UIViewController    {
                                   headerView: UIView?,
                                   footerView: UIView?,
                                   didDismissAlertHandler dismiss: CFAlertViewControllerDismissBlock?) {
-        
+        self.init(title: title,
+                  titleColor: titleColor,
+                  titleFont: nil,
+                  message: message,
+                  messageColor: messageColor,
+                  messageFont: nil,
+                  textAlignment: textAlignment,
+                  preferredStyle: preferredStyle,
+                  headerView: nil,
+                  footerView: nil,
+                  didDismissAlertHandler: dismiss)
+    }
+
+    @objc public convenience init(title: String?,
+                             titleColor: UIColor?,
+                             titleFont: UIFont?,
+                             message: String?,
+                             messageColor: UIColor?,
+                             messageFont: UIFont?,
+                             textAlignment: NSTextAlignment,
+                             preferredStyle: CFAlertControllerStyle,
+                             headerView: UIView?,
+                             footerView: UIView?,
+                             didDismissAlertHandler dismiss: CFAlertViewControllerDismissBlock?) {
         // Get Current Bundle
         let bundle = Bundle(for: CFAlertViewController.self)
         
@@ -307,11 +372,13 @@ open class CFAlertViewController: UIViewController    {
         if let titleColor = titleColor {
             self.titleColor = titleColor
         }
-        
+        self.titleFont = titleFont
+
         messageString = message
         if let messageColor = messageColor {
             self.messageColor = messageColor
         }
+        self.messageFont = messageFont
         
         self.textAlignment = textAlignment
         setHeaderView(headerView, shouldUpdateContainerFrame: false, withAnimation: false)
@@ -732,7 +799,7 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
             cell = tableView.dequeueReusableCell(withIdentifier: CFAlertTitleSubtitleTableViewCell.identifier())
             let titleSubtitleCell: CFAlertTitleSubtitleTableViewCell? = (cell as? CFAlertTitleSubtitleTableViewCell)
             // Set Content
-            titleSubtitleCell?.setTitle(titleString, titleColor: titleColor, subtitle: messageString, subtitleColor: messageColor, alignment: textAlignment!)
+            titleSubtitleCell?.setTitle(titleString, titleColor: titleColor, titleFont: titleFont, subtitle: messageString, subtitleColor: messageColor, subtitleFont: messageFont, alignment: textAlignment!)
             // Set Content Margin
             titleSubtitleCell?.contentTopMargin = 20.0
             if self.actionList.count <= 0 {
