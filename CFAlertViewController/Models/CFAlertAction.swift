@@ -33,8 +33,6 @@ open class CFAlertAction: NSObject, NSCopying {
     @objc public var alignment: CFAlertActionAlignment = .justified
     @objc public var backgroundColor: UIColor?
     @objc public var textColor: UIColor?
-    @objc public var borderColor: UIColor?
-    @objc public var borderWidth: CGFloat = 0
     @objc public var font: UIFont?
     @objc public var handler: CFAlertActionHandlerBlock?
     
@@ -45,8 +43,6 @@ open class CFAlertAction: NSObject, NSCopying {
                                    alignment: CFAlertActionAlignment,
                                    backgroundColor: UIColor?,
                                    textColor: UIColor?,
-                                   borderColor: UIColor?,
-                                   borderWidth: CGFloat = 0,
                                    font: UIFont?,
                                    handler: CFAlertActionHandlerBlock?) -> CFAlertAction  {
         
@@ -55,8 +51,6 @@ open class CFAlertAction: NSObject, NSCopying {
                                   alignment: alignment,
                                   backgroundColor: backgroundColor,
                                   textColor: textColor,
-                                  borderColor: borderColor,
-                                  borderWidth: borderWidth,
                                   font: font,
                                   handler: handler)
     }
@@ -76,8 +70,6 @@ open class CFAlertAction: NSObject, NSCopying {
                   alignment: alignment,
                   backgroundColor: backgroundColor,
                   textColor: textColor,
-                  borderColor: nil,
-                  borderWidth: 0,
                   font: nil,
                   handler: handler)
     }
@@ -87,8 +79,6 @@ open class CFAlertAction: NSObject, NSCopying {
                                   alignment: CFAlertActionAlignment,
                                   backgroundColor: UIColor?,
                                   textColor: UIColor?,
-                                  borderColor: UIColor?,
-                                  borderWidth: CGFloat,
                                   font: UIFont?,
                                   handler: CFAlertActionHandlerBlock?) {
         
@@ -101,8 +91,6 @@ open class CFAlertAction: NSObject, NSCopying {
         self.alignment = alignment
         self.backgroundColor = backgroundColor
         self.textColor = textColor
-        self.borderColor = borderColor ?? UIColor.clear
-        self.borderWidth = borderWidth
         self.font = font
         self.handler = handler
     }
@@ -115,8 +103,6 @@ open class CFAlertAction: NSObject, NSCopying {
                                   alignment: alignment,
                                   backgroundColor: backgroundColor,
                                   textColor: textColor,
-                                  borderColor: nil,
-                                  borderWidth: 0,
                                   font: nil,
                                   handler: handler)
     }
