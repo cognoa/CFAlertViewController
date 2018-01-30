@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bUg-IY-tHd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bUg-IY-tHd">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13165.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -28,7 +28,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ciV-xs-aLY">
-                                                    <rect key="frame" x="15" y="13" width="345" height="34.5"/>
+                                                    <rect key="frame" x="15" y="16" width="345" height="29"/>
                                                     <segments>
                                                         <segment title="Alert"/>
                                                         <segment title="Action Sheet"/>
@@ -98,7 +98,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="EaP-IP-Zb5">
-                                                    <rect key="frame" x="15" y="13" width="345" height="34.5"/>
+                                                    <rect key="frame" x="15" y="16" width="345" height="29"/>
                                                     <segments>
                                                         <segment title="Left"/>
                                                         <segment title="Center"/>
@@ -204,7 +204,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8Sd-U3-eHA">
-                                                    <rect key="frame" x="15" y="13" width="345" height="34.5"/>
+                                                    <rect key="frame" x="15" y="16" width="345" height="29"/>
                                                     <segments>
                                                         <segment title="Justified"/>
                                                         <segment title="Left"/>
@@ -233,7 +233,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="fQf-mJ-Hjk">
-                                                    <rect key="frame" x="15" y="13" width="345" height="34.5"/>
+                                                    <rect key="frame" x="15" y="16" width="345" height="29"/>
                                                     <segments>
                                                         <segment title="Plain"/>
                                                         <segment title="Blur"/>
@@ -252,7 +252,7 @@
                                         <rect key="frame" x="0.0" y="683.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="S9J-ab-Iwg" id="81n-GE-1et">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Color" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XuR-o1-oXg">
@@ -369,6 +369,32 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="sWJ-df-321">
+                                        <rect key="frame" x="0.0" y="915.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sWJ-df-321" id="hW7-7a-C6c">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Selection Items" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emf-eP-T4p">
+                                                    <rect key="frame" x="15" y="11" width="165" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="93Q-6o-TdO">
+                                                    <rect key="frame" x="311" y="6.5" width="51" height="31"/>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="emf-eP-T4p" firstAttribute="centerY" secondItem="hW7-7a-C6c" secondAttribute="centerY" id="4WI-qf-Wdl"/>
+                                                <constraint firstAttribute="trailing" secondItem="93Q-6o-TdO" secondAttribute="trailing" constant="15" id="627-uB-ahx"/>
+                                                <constraint firstItem="emf-eP-T4p" firstAttribute="leading" secondItem="hW7-7a-C6c" secondAttribute="leading" constant="15" id="XgX-Gl-rcJ"/>
+                                                <constraint firstItem="93Q-6o-TdO" firstAttribute="centerY" secondItem="hW7-7a-C6c" secondAttribute="centerY" id="lWN-fv-N6j"/>
+                                                <constraint firstItem="93Q-6o-TdO" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="emf-eP-T4p" secondAttribute="trailing" constant="20" id="z3G-vU-Gon"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -402,6 +428,7 @@
                         <outlet property="settingAddFooterSwitch" destination="rWy-BH-Bui" id="foF-ew-MUr"/>
                         <outlet property="settingAddHeaderSwitch" destination="EQw-uE-p0m" id="1L2-Lb-5U8"/>
                         <outlet property="settingCloseOnBackgroundTapSwitch" destination="mgc-Y1-uDZ" id="pn7-Jw-F6A"/>
+                        <outlet property="settingShowSelectionItems" destination="93Q-6o-TdO" id="0tn-6p-c9h"/>
                         <outlet property="textAlignmentSegment" destination="EaP-IP-Zb5" id="wxb-A6-pTi"/>
                         <outlet property="titleTextfield" destination="KFV-aS-6dI" id="8pl-BA-Usm"/>
                     </connections>
@@ -456,13 +483,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Red" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TO3-jf-1z8">
-                                                    <rect key="frame" x="20" y="14" width="30" height="20.5"/>
+                                                    <rect key="frame" x="28" y="17" width="30" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="lZh-fs-89u">
-                                                    <rect key="frame" x="18" y="35" width="339" height="31"/>
+                                                    <rect key="frame" x="26" y="38" width="323" height="31"/>
                                                     <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <connections>
                                                         <action selector="sliderValueChanged:" destination="j1P-rT-EfB" eventType="valueChanged" id="M7Z-nK-CCT"/>
@@ -487,13 +514,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Green" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8O6-WT-wQf">
-                                                    <rect key="frame" x="20" y="14" width="46.5" height="20.5"/>
+                                                    <rect key="frame" x="28" y="17" width="46.5" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="2W6-5w-Qwg">
-                                                    <rect key="frame" x="18" y="35" width="339" height="31"/>
+                                                    <rect key="frame" x="26" y="38" width="323" height="31"/>
                                                     <color key="tintColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <connections>
                                                         <action selector="sliderValueChanged:" destination="j1P-rT-EfB" eventType="valueChanged" id="CMd-Fd-7nD"/>
@@ -518,13 +545,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4zb-ET-lZi">
-                                                    <rect key="frame" x="20" y="14" width="34" height="20.5"/>
+                                                    <rect key="frame" x="28" y="17" width="34" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="bkP-Sj-2Of">
-                                                    <rect key="frame" x="18" y="35" width="339" height="31"/>
+                                                    <rect key="frame" x="26" y="38" width="323" height="31"/>
                                                     <color key="tintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <connections>
                                                         <action selector="sliderValueChanged:" destination="j1P-rT-EfB" eventType="valueChanged" id="jSI-MO-len"/>
@@ -549,13 +576,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alpha" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FMi-Zh-X6E">
-                                                    <rect key="frame" x="20" y="14" width="44" height="20.5"/>
+                                                    <rect key="frame" x="28" y="17" width="44" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.29999999999999999" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="gPw-9A-63d">
-                                                    <rect key="frame" x="18" y="35" width="339" height="31"/>
+                                                    <rect key="frame" x="26" y="38" width="323" height="31"/>
                                                     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <connections>
                                                         <action selector="sliderValueChanged:" destination="j1P-rT-EfB" eventType="valueChanged" id="WwC-7v-7zV"/>
