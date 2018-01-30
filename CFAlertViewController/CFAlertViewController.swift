@@ -823,8 +823,9 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
             titleSubtitleCell?.contentTopMargin = 20.0
             if self.actionList.count <= 0 {
                 titleSubtitleCell?.contentBottomMargin = 20.0
-            }
-            else {
+            } else if selectionItems.count > 0 {
+                titleSubtitleCell?.contentBottomMargin = 24.0
+            } else {
                 titleSubtitleCell?.contentBottomMargin = 0.0
             }
             
@@ -833,6 +834,7 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
             let selectionCell: CFAlertActionSelectionTableViewCell? = (cell as? CFAlertActionSelectionTableViewCell)
             selectionCell?.selectionItem = selectionItems[indexPath.row]
             selectionCell?.delegate = self
+            selectionCell?.topSeparatorView.isHidden = indexPath.row == 0 ? false : true
             
         case 2:
             // Get Action Cell Instance
@@ -844,7 +846,9 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
             actionCell?.action = self.actionList[indexPath.row]
             // Set Top Margin For First Action
             if indexPath.row == 0 {
-                if let titleString = titleString, let messageString = messageString, (!titleString.isEmpty && !messageString.isEmpty)   {
+                if selectionItems.count > 0 {
+                    actionCell?.actionButtonTopMargin = 24.0
+                } else if let titleString = titleString, let messageString = messageString, (!titleString.isEmpty && !messageString.isEmpty)   {
                     actionCell?.actionButtonTopMargin = 12.0
                 }
                 else {

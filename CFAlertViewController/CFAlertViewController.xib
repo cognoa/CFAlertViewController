@@ -51,14 +51,13 @@
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oE9-Fa-uD3">
                             <rect key="frame" x="10" y="233.5" width="355" height="200"/>
                             <subviews>
-                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bKB-GW-3Ko">
+                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bKB-GW-3Ko">
                                     <rect key="frame" x="0.0" y="0.0" width="355" height="200"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="500" id="g1a-ZP-m4a"/>
                                         <constraint firstAttribute="height" priority="900" constant="200" id="mgv-7M-W5c"/>
                                     </constraints>
-                                    <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <connections>
                                         <outlet property="dataSource" destination="-1" id="kEi-QW-7e1"/>
                                         <outlet property="delegate" destination="-1" id="iCO-vP-98q"/>

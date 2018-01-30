@@ -41,19 +41,42 @@
                             <action selector="selectionButtonPressed:" destination="qEZ-mk-2SF" eventType="touchUpInside" id="a2W-OV-EoK"/>
                         </connections>
                     </button>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gMu-f1-nIo" userLabel="Top SeparatorView">
+                        <rect key="frame" x="24" y="0.0" width="272" height="1"/>
+                        <color key="backgroundColor" red="0.86666666670000003" green="0.86666666670000003" blue="0.86666666670000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="icV-S2-ere"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CfI-dJ-fI6" userLabel="Bottom SeparatorView">
+                        <rect key="frame" x="24" y="41.5" width="272" height="1"/>
+                        <color key="backgroundColor" red="0.86666666670000003" green="0.86666666670000003" blue="0.86666666670000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="l8h-Ef-21V"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="CfI-dJ-fI6" secondAttribute="bottom" constant="1" id="ACc-TQ-guh"/>
+                    <constraint firstItem="gMu-f1-nIo" firstAttribute="leading" secondItem="OZt-hB-Fze" secondAttribute="leading" constant="24" id="Get-NJ-6lZ"/>
                     <constraint firstItem="yhW-ZX-XeL" firstAttribute="centerY" secondItem="OZt-hB-Fze" secondAttribute="centerY" id="Hc1-9p-cX5"/>
                     <constraint firstItem="Wlx-Ji-jcq" firstAttribute="top" secondItem="OZt-hB-Fze" secondAttribute="top" constant="16" id="LR3-3W-fCa"/>
                     <constraint firstItem="Wlx-Ji-jcq" firstAttribute="leading" secondItem="OZt-hB-Fze" secondAttribute="leading" constant="24" id="cYl-MW-agq"/>
                     <constraint firstAttribute="bottom" secondItem="Wlx-Ji-jcq" secondAttribute="bottom" constant="16" id="dmt-De-NjH"/>
                     <constraint firstAttribute="trailing" secondItem="yhW-ZX-XeL" secondAttribute="trailing" constant="24" id="dye-RP-7r6"/>
+                    <constraint firstAttribute="trailing" secondItem="gMu-f1-nIo" secondAttribute="trailing" constant="24" id="iTv-XB-cS6"/>
+                    <constraint firstItem="gMu-f1-nIo" firstAttribute="top" secondItem="OZt-hB-Fze" secondAttribute="top" id="jCR-Md-PcK"/>
+                    <constraint firstAttribute="trailing" secondItem="CfI-dJ-fI6" secondAttribute="trailing" constant="24" id="liO-Sh-QtT"/>
                     <constraint firstItem="yhW-ZX-XeL" firstAttribute="leading" secondItem="Wlx-Ji-jcq" secondAttribute="trailing" constant="16" id="nxh-pk-Vmo"/>
+                    <constraint firstItem="CfI-dJ-fI6" firstAttribute="leading" secondItem="OZt-hB-Fze" secondAttribute="leading" constant="24" id="o6I-vY-1vo"/>
                 </constraints>
             </tableViewCellContentView>
+            <inset key="separatorInset" minX="24" minY="0.0" maxX="24" maxY="0.0"/>
             <connections>
+                <outlet property="bottomSeparatorView" destination="CfI-dJ-fI6" id="aZL-1y-C8P"/>
                 <outlet property="selectionButton" destination="yhW-ZX-XeL" id="Frn-fz-Aba"/>
                 <outlet property="titleLabel" destination="Wlx-Ji-jcq" id="xVR-8m-eqy"/>
+                <outlet property="topSeparatorView" destination="gMu-f1-nIo" id="Efg-db-e5g"/>
             </connections>
             <point key="canvasLocation" x="51" y="-100"/>
         </tableViewCell>

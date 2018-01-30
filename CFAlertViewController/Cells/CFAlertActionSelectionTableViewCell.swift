@@ -16,6 +16,9 @@ import UIKit
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var selectionButton: UIButton!
+
+    @IBOutlet weak var topSeparatorView: UIView!
+    @IBOutlet weak var bottomSeparatorView: UIView!
     
     @objc public var selectionItem: CFAlertSelectionItem? {
         didSet {
