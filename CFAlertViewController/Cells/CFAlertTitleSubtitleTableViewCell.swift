@@ -95,15 +95,25 @@ public class CFAlertTitleSubtitleTableViewCell: UITableViewCell {
     
     
     // MARK: Helper Methods
-    public func setTitle(_ title: String?, titleColor: UIColor?, subtitle: String?, subtitleColor: UIColor?, alignment: NSTextAlignment) {
+    public func setTitle(_ title: String?, titleColor: UIColor?, titleFont: UIFont?, subtitle: String?, subtitleColor: UIColor?, subtitleFont: UIFont?, alignment: NSTextAlignment) {
         
         // Set Cell Text Fonts & Colors
         titleLabel?.text = title
         titleLabel?.textColor = titleColor
         titleLabel?.textAlignment = alignment
+        if #available(iOS 8.2, *) {
+            titleLabel?.font = titleFont ?? UIFont.systemFont(ofSize: 18, weight: .bold)
+        } else {
+            titleLabel?.font = titleFont ?? UIFont.systemFont(ofSize: 18)
+        }
         subtitleLabel?.text = subtitle
         subtitleLabel?.textColor = subtitleColor
         subtitleLabel?.textAlignment = alignment
+        if #available(iOS 8.2, *) {
+            subtitleLabel?.font = subtitleFont ?? UIFont.systemFont(ofSize: 18, weight: .light)
+        } else {
+            subtitleLabel?.font = subtitleFont ?? UIFont.systemFont(ofSize: 18)
+        }
         
         // Update Constraints
         var titleCharCount = 0
