@@ -35,7 +35,7 @@
 
 
 
-@interface HomeTableViewController () <ColorPickerTableViewControllerDelegate>
+@interface HomeTableViewController () <ColorPickerTableViewControllerDelegate, CFAlertViewControllerSelectionDelegate>
 
 // Navigation
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *closeButton;
@@ -62,6 +62,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *settingCloseOnBackgroundTapSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *settingAddHeaderSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *settingAddFooterSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *settingShowSelectionItems;
 
 @end
 
@@ -250,7 +251,26 @@
             [self presentViewController:alert animated:YES completion:nil];
         });
     }
+    
+    if (self.settingShowSelectionItems.isOn) {
+        CFAlertSelectionItem *item1 = [[CFAlertSelectionItem alloc] initWithTitle:@"Play with Toys" isSelected:false];
+        CFAlertSelectionItem *item2 = [[CFAlertSelectionItem alloc] initWithTitle:@"Talk with Friends" isSelected:false];
+        CFAlertSelectionItem *item3 = [[CFAlertSelectionItem alloc] initWithTitle:@"Play with Toys" isSelected:false];
+        CFAlertSelectionItem *item4 = [[CFAlertSelectionItem alloc] initWithTitle:@"Talk with Friends" isSelected:false];
+        CFAlertSelectionItem *item5 = [[CFAlertSelectionItem alloc] initWithTitle:@"Play with Toys" isSelected:false];
+        CFAlertSelectionItem *item6 = [[CFAlertSelectionItem alloc] initWithTitle:@"Talk with Friends" isSelected:false];
+
+        [alert addSelectionItem:item1];
+        [alert addSelectionItem:item2];
+        [alert addSelectionItem:item3];
+        [alert addSelectionItem:item4];
+        [alert addSelectionItem:item5];
+        [alert addSelectionItem:item6];
+        alert.selectionDelegate = self;
+    }
 }
+
+
 
 #pragma mark - Mapping Methods
 
@@ -349,6 +369,12 @@
         colorPickerVC.color = self.colorView.backgroundColor;
     }
 }
+
+#pragma mark - CFAlertActionSelectionTableViewCellDelegate
+- (void) selectionItemChangedWithSelectionItems:(NSArray<CFAlertSelectionItem *> *)selectionItems at:(NSIndexPath *)indexPath selected:(BOOL)selected {
+    NSLog(@"Item changed at indexpath: %@\tSelected: %lld", indexPath, selected);
+}
+
 
 #pragma mark - ColorPickerTableViewControllerDelegate
 

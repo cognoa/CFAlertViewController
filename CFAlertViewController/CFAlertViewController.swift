@@ -8,6 +8,9 @@
 
 import UIKit
 
+@objc public protocol CFAlertViewControllerSelectionDelegate {
+    @objc func selectionItemChanged(selectionItems: [CFAlertSelectionItem], at indexPath: IndexPath, selected: Bool)
+}
 
 open class CFAlertViewController: UIViewController    {
     
@@ -127,6 +130,9 @@ open class CFAlertViewController: UIViewController    {
             return self.actionList
         }
     }
+    @objc public var selectionItems = [CFAlertSelectionItem]()
+    @objc public var selectionDelegate: CFAlertViewControllerSelectionDelegate?
+    
     internal var _headerView : UIView?
     @objc public var headerView: UIView?  {
         set {
@@ -435,6 +441,8 @@ open class CFAlertViewController: UIViewController    {
         tableView?.register(actionCellNib, forCellReuseIdentifier: CFAlertActionTableViewCell.identifier())
         let titleSubtitleCellNib = UINib(nibName: CFAlertTitleSubtitleTableViewCell.identifier(), bundle: Bundle(for: CFAlertTitleSubtitleTableViewCell.self))
         tableView?.register(titleSubtitleCellNib, forCellReuseIdentifier: CFAlertTitleSubtitleTableViewCell.identifier())
+        let selectionCellNib = UINib(nibName: CFAlertActionSelectionTableViewCell.identifier(), bundle: Bundle(for: CFAlertTitleSubtitleTableViewCell.self))
+        tableView?.register(selectionCellNib, forCellReuseIdentifier: CFAlertActionSelectionTableViewCell.identifier())
         
         // Add Key Value Observer
         tableView?.addObserver(self, forKeyPath: "contentSize", options: [.new, .old, .prior], context: nil)
@@ -504,6 +512,14 @@ open class CFAlertViewController: UIViewController    {
         else {
             print("WARNING >>> CFAlertViewController received nil action to add. It must not be nil.")
         }
+    }
+    
+    @objc public func addSelectionItem(_ item: CFAlertSelectionItem?) {
+        guard let item = item else {
+            print("WARNING >>> CFAlertViewController received nil selectionItem to add. It must not be nil.")
+            return
+        }
+        selectionItems.append(item)
     }
     
     @objc public func dismissAlert(withAnimation animate: Bool, completion: (() -> Void)?) {
@@ -759,11 +775,11 @@ open class CFAlertViewController: UIViewController    {
 }
 
 
-extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFAlertActionTableViewCellDelegate {
+extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFAlertActionTableViewCellDelegate, CFAlertActionSelectionTableViewCellDelegate {
     
     // MARK: - UITableViewDataSource
     public func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -779,6 +795,9 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
             }
             
         case 1:
+            return selectionItems.count
+            
+        case 2:
             return self.actionList.count
             
         default:
@@ -804,12 +823,20 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
             titleSubtitleCell?.contentTopMargin = 20.0
             if self.actionList.count <= 0 {
                 titleSubtitleCell?.contentBottomMargin = 20.0
-            }
-            else {
+            } else if selectionItems.count > 0 {
+                titleSubtitleCell?.contentBottomMargin = 24.0
+            } else {
                 titleSubtitleCell?.contentBottomMargin = 0.0
             }
             
         case 1:
+            cell = tableView.dequeueReusableCell(withIdentifier: CFAlertActionSelectionTableViewCell.identifier())
+            let selectionCell: CFAlertActionSelectionTableViewCell? = (cell as? CFAlertActionSelectionTableViewCell)
+            selectionCell?.selectionItem = selectionItems[indexPath.row]
+            selectionCell?.delegate = self
+            selectionCell?.topSeparatorView.isHidden = indexPath.row == 0 ? false : true
+            
+        case 2:
             // Get Action Cell Instance
             cell = tableView.dequeueReusableCell(withIdentifier: CFAlertActionTableViewCell.identifier())
             let actionCell: CFAlertActionTableViewCell? = (cell as? CFAlertActionTableViewCell)
@@ -819,7 +846,9 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
             actionCell?.action = self.actionList[indexPath.row]
             // Set Top Margin For First Action
             if indexPath.row == 0 {
-                if let titleString = titleString, let messageString = messageString, (!titleString.isEmpty && !messageString.isEmpty)   {
+                if selectionItems.count > 0 {
+                    actionCell?.actionButtonTopMargin = 24.0
+                } else if let titleString = titleString, let messageString = messageString, (!titleString.isEmpty && !messageString.isEmpty)   {
                     actionCell?.actionButtonTopMargin = 12.0
                 }
                 else {
@@ -843,7 +872,6 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
         default:
             break
         }
-        
         return cell!
     }
     
@@ -872,6 +900,15 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
                 actionHandler(action)
             }
         })
+    }
+    
+    // MARK: CFAlertActionTableViewSelectionDelegate
+    public func selectionItemCellSelected(cell: CFAlertActionSelectionTableViewCell, selectionItem: CFAlertSelectionItem?) {
+        guard let selectionIndexPath = self.tableView?.indexPath(for: cell) else {
+            return
+        }
+        let item = selectionItems[selectionIndexPath.row]
+        selectionDelegate?.selectionItemChanged(selectionItems: selectionItems, at: selectionIndexPath, selected: item.isSelected)
     }
 }
 
