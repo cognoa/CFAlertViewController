@@ -8,23 +8,22 @@
 
 import UIKit
 
-public protocol CFAlertActionSelectionTableViewCellDelegate: class {
+@objc public protocol CFAlertActionSelectionTableViewCellDelegate: class {
     func selectionItemCellSelected(cell: CFAlertActionSelectionTableViewCell, selectionItem: CFAlertSelectionItem?)
 }
 
-public class CFAlertActionSelectionTableViewCell: UITableViewCell {
+@objc public class CFAlertActionSelectionTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var selectionButton: UIButton!
     
-    public var selectionItem: CFAlertSelectionItem? {
+    @objc public var selectionItem: CFAlertSelectionItem? {
         didSet {
             titleLabel.text = selectionItem?.title
-            selectionButton.setImage(selectionItem?.buttonSelectedImage, for: .selected)
         }
     }
     
-    public weak var delegate: CFAlertActionSelectionTableViewCellDelegate?
+    @objc public weak var delegate: CFAlertActionSelectionTableViewCellDelegate?
     
     public static func identifier() -> String    {
         return String(describing: CFAlertActionSelectionTableViewCell.self)
@@ -46,13 +45,24 @@ public class CFAlertActionSelectionTableViewCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
     
-    internal func basicInitialisation() {        
-        selectionButton.layer.cornerRadius = 4.0
-        selectionButton.layer.borderColor = UIColor(red: 147.0/255.0, green: 149.0/255.0, blue: 151.0/255.0, alpha: 1.0).cgColor
+    // MARK: - Layout Methods
+    public override func layoutSubviews() {
+        super.layoutIfNeeded()
+        contentView.setNeedsLayout()
+        contentView.layoutIfNeeded()
+    }
+    
+    internal func basicInitialisation() {
+        let defaultImage = UIImage(named: "check-box-default")
+        selectionButton.setBackgroundImage(defaultImage, for: .normal)
+        let selectedImage = UIImage(named: "check-box-active")
+        selectionButton.setBackgroundImage(selectedImage, for: .selected)
     }
     
     @IBAction func selectionButtonPressed(_ sender: Any) {
+        selectionButton.isSelected = !selectionButton.isSelected
         print("Selection Button selected: \(selectionButton.isSelected)")
+        selectionItem?.isSelected = selectionButton.isSelected
         delegate?.selectionItemCellSelected(cell: self, selectionItem: selectionItem)
     }
 }

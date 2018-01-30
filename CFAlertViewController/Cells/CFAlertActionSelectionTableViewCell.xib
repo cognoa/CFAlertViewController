@@ -24,34 +24,35 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wlx-Ji-jcq">
-                        <rect key="frame" x="16" y="11" width="229" height="22"/>
+                        <rect key="frame" x="24" y="16" width="232" height="11.5"/>
                         <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="16"/>
                         <color key="textColor" red="0.34509803919999998" green="0.34509803919999998" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yhW-ZX-XeL">
-                        <rect key="frame" x="272" y="10" width="24" height="24"/>
+                    <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yhW-ZX-XeL">
+                        <rect key="frame" x="272" y="9" width="24" height="24"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="24" id="6Vc-S7-yiz"/>
-                            <constraint firstAttribute="width" constant="24" id="bPp-WD-gKj"/>
+                            <constraint firstAttribute="width" constant="24" id="Gvz-SJ-Fj2"/>
+                            <constraint firstAttribute="height" constant="24" id="gVJ-kL-82d"/>
                         </constraints>
-                        <color key="tintColor" red="0.1647058824" green="0.63921568630000003" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <connections>
                             <action selector="selectionButtonPressed:" destination="qEZ-mk-2SF" eventType="touchUpInside" id="a2W-OV-EoK"/>
                         </connections>
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Wlx-Ji-jcq" firstAttribute="centerY" secondItem="OZt-hB-Fze" secondAttribute="centerY" id="AW9-jD-IxL"/>
                     <constraint firstItem="yhW-ZX-XeL" firstAttribute="centerY" secondItem="OZt-hB-Fze" secondAttribute="centerY" id="Hc1-9p-cX5"/>
-                    <constraint firstItem="Wlx-Ji-jcq" firstAttribute="leading" secondItem="OZt-hB-Fze" secondAttribute="leading" constant="16" id="cYl-MW-agq"/>
+                    <constraint firstItem="Wlx-Ji-jcq" firstAttribute="top" secondItem="OZt-hB-Fze" secondAttribute="top" constant="16" id="LR3-3W-fCa"/>
+                    <constraint firstItem="Wlx-Ji-jcq" firstAttribute="leading" secondItem="OZt-hB-Fze" secondAttribute="leading" constant="24" id="cYl-MW-agq"/>
+                    <constraint firstAttribute="bottom" secondItem="Wlx-Ji-jcq" secondAttribute="bottom" constant="16" id="dmt-De-NjH"/>
                     <constraint firstAttribute="trailing" secondItem="yhW-ZX-XeL" secondAttribute="trailing" constant="24" id="dye-RP-7r6"/>
-                    <constraint firstItem="yhW-ZX-XeL" firstAttribute="leading" secondItem="Wlx-Ji-jcq" secondAttribute="trailing" constant="27" id="nxh-pk-Vmo"/>
+                    <constraint firstItem="yhW-ZX-XeL" firstAttribute="leading" secondItem="Wlx-Ji-jcq" secondAttribute="trailing" constant="16" id="nxh-pk-Vmo"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="selectionButton" destination="yhW-ZX-XeL" id="Frn-fz-Aba"/>
-                <outlet property="selectionText" destination="Wlx-Ji-jcq" id="c18-1a-1L9"/>
                 <outlet property="titleLabel" destination="Wlx-Ji-jcq" id="xVR-8m-eqy"/>
             </connections>
             <point key="canvasLocation" x="51" y="-100"/>

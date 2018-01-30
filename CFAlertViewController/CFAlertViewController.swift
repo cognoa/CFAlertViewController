@@ -8,6 +8,9 @@
 
 import UIKit
 
+@objc public protocol CFAlertViewControllerSelectionDelegate {
+    @objc func selectionItemChanged(selectionItems: [CFAlertSelectionItem], at indexPath: IndexPath, selected: Bool)
+}
 
 open class CFAlertViewController: UIViewController    {
     
@@ -127,6 +130,9 @@ open class CFAlertViewController: UIViewController    {
             return self.actionList
         }
     }
+    @objc public var selectionItems = [CFAlertSelectionItem]()
+    @objc public var selectionDelegate: CFAlertViewControllerSelectionDelegate?
+    
     internal var _headerView : UIView?
     @objc public var headerView: UIView?  {
         set {
@@ -189,7 +195,6 @@ open class CFAlertViewController: UIViewController    {
     internal var messageColor: UIColor = CFAlertViewController.CF_ALERT_DEFAULT_MESSAGE_COLOR()
     internal var messageFont: UIFont?
     internal var actionList = [CFAlertAction]()
-    internal var selectionItems = [CFAlertSelectionItem]()
     internal var dismissHandler: CFAlertViewControllerDismissBlock?
     internal var keyboardHeight: CGFloat = 0.0   {
         
@@ -436,8 +441,9 @@ open class CFAlertViewController: UIViewController    {
         tableView?.register(actionCellNib, forCellReuseIdentifier: CFAlertActionTableViewCell.identifier())
         let titleSubtitleCellNib = UINib(nibName: CFAlertTitleSubtitleTableViewCell.identifier(), bundle: Bundle(for: CFAlertTitleSubtitleTableViewCell.self))
         tableView?.register(titleSubtitleCellNib, forCellReuseIdentifier: CFAlertTitleSubtitleTableViewCell.identifier())
-                
-
+        let selectionCellNib = UINib(nibName: CFAlertActionSelectionTableViewCell.identifier(), bundle: Bundle(for: CFAlertTitleSubtitleTableViewCell.self))
+        tableView?.register(selectionCellNib, forCellReuseIdentifier: CFAlertActionSelectionTableViewCell.identifier())
+        
         // Add Key Value Observer
         tableView?.addObserver(self, forKeyPath: "contentSize", options: [.new, .old, .prior], context: nil)
     }
@@ -862,7 +868,6 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
         default:
             break
         }
-        
         return cell!
     }
     
@@ -893,13 +898,13 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
         })
     }
     
-    // MARK:
+    // MARK: CFAlertActionTableViewSelectionDelegate
     public func selectionItemCellSelected(cell: CFAlertActionSelectionTableViewCell, selectionItem: CFAlertSelectionItem?) {
-        guard let indexPath = self.tableView?.indexPath(for: cell) else {
+        guard let selectionIndexPath = self.tableView?.indexPath(for: cell) else {
             return
         }
-        let selectionItem = selectionItems[indexPath.row]
-        selectionItem.isSelected = !selectionItem.isSelected
+        let item = selectionItems[selectionIndexPath.row]
+        selectionDelegate?.selectionItemChanged(selectionItems: selectionItems, at: selectionIndexPath, selected: item.isSelected)
     }
 }
 
