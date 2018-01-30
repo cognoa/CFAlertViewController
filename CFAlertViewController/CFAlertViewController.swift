@@ -187,7 +187,7 @@ open class CFAlertViewController: UIViewController    {
     internal var messageString: String?
     internal var messageColor: UIColor = CFAlertViewController.CF_ALERT_DEFAULT_MESSAGE_COLOR()
     internal var actionList = [CFAlertAction]()
-//    internal var selectionList = CFAlertSel
+    internal var selectionItems = [CFAlertSelectionItem]()
     internal var dismissHandler: CFAlertViewControllerDismissBlock?
     internal var keyboardHeight: CGFloat = 0.0   {
         
@@ -439,6 +439,14 @@ open class CFAlertViewController: UIViewController    {
         else {
             print("WARNING >>> CFAlertViewController received nil action to add. It must not be nil.")
         }
+    }
+    
+    @objc public func addSelectionItem(_ item: CFAlertSelectionItem?) {
+        guard let item = item else {
+            print("WARNING >>> CFAlertViewController received nil selectionItem to add. It must not be nil.")
+            return
+        }
+        selectionItems.append(item)
     }
     
     @objc public func dismissAlert(withAnimation animate: Bool, completion: (() -> Void)?) {
@@ -694,11 +702,11 @@ open class CFAlertViewController: UIViewController    {
 }
 
 
-extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFAlertActionTableViewCellDelegate {
+extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFAlertActionTableViewCellDelegate, CFAlertActionSelectionTableViewCellDelegate {
     
     // MARK: - UITableViewDataSource
     public func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -714,6 +722,9 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
             }
             
         case 1:
+            return selectionItems.count
+            
+        case 2:
             return self.actionList.count
             
         default:
@@ -745,6 +756,12 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
             }
             
         case 1:
+            cell = tableView.dequeueReusableCell(withIdentifier: CFAlertActionSelectionTableViewCell.identifier())
+            let selectionCell: CFAlertActionSelectionTableViewCell? = (cell as? CFAlertActionSelectionTableViewCell)
+            selectionCell?.selectionItem = selectionItems[indexPath.row]
+            selectionCell?.delegate = self
+            
+        case 2:
             // Get Action Cell Instance
             cell = tableView.dequeueReusableCell(withIdentifier: CFAlertActionTableViewCell.identifier())
             let actionCell: CFAlertActionTableViewCell? = (cell as? CFAlertActionTableViewCell)
@@ -807,6 +824,15 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
                 actionHandler(action)
             }
         })
+    }
+    
+    // MARK:
+    public func selectionItemCellSelected(cell: CFAlertActionSelectionTableViewCell, selectionItem: CFAlertSelectionItem?) {
+        guard let indexPath = self.tableView?.indexPath(for: cell) else {
+            return
+        }
+        let selectionItem = selectionItems[indexPath.row]
+        selectionItem.isSelected = !selectionItem.isSelected
     }
 }
 

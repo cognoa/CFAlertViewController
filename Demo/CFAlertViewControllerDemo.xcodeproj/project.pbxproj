@@ -60,6 +60,8 @@
 		6BA9A6802020F0CE00F1A1C8 /* CFAlertSelectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA9A67F2020F0CE00F1A1C8 /* CFAlertSelectionItem.swift */; };
 		6BA9A6832020F11700F1A1C8 /* CFAlertActionSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA9A6812020F11700F1A1C8 /* CFAlertActionSelectionTableViewCell.swift */; };
 		6BA9A6842020F11700F1A1C8 /* CFAlertActionSelectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BA9A6822020F11700F1A1C8 /* CFAlertActionSelectionTableViewCell.xib */; };
+		6BE8E1372020FD35005EB1A4 /* CFAlertSelectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA9A67F2020F0CE00F1A1C8 /* CFAlertSelectionItem.swift */; };
+		6BE8E1382020FF07005EB1A4 /* CFAlertActionSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA9A6812020F11700F1A1C8 /* CFAlertActionSelectionTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -529,6 +531,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2FC771EC1F5FF9C300D854E1 /* CFAlertNotificationInteractiveTransition.swift in Sources */,
+				6BE8E1372020FD35005EB1A4 /* CFAlertSelectionItem.swift in Sources */,
 				2FC771E81F5FF9C300D854E1 /* CFPushButton.swift in Sources */,
 				2FC771F31F5FFC6A00D854E1 /* CustomFooterView.m in Sources */,
 				2FC771E71F5FF9C300D854E1 /* CFAlertAction.swift in Sources */,
@@ -537,6 +540,7 @@
 				2FC771E31F5FF9C300D854E1 /* CFAlertTitleSubtitleTableViewCell.swift in Sources */,
 				2FC771E51F5FF9C300D854E1 /* CFAlertActionTableViewCell.swift in Sources */,
 				2FC771F21F5FFC6A00D854E1 /* ColorPickerTableViewController.m in Sources */,
+				6BE8E1382020FF07005EB1A4 /* CFAlertActionSelectionTableViewCell.swift in Sources */,
 				2FC771EA1F5FF9C300D854E1 /* CFAlertBaseInteractiveTransition.swift in Sources */,
 				2FC771EE1F5FF9C300D854E1 /* CFAlertActionSheetTransitionGestureRecognizer.swift in Sources */,
 				2FC771F51F5FFC6A00D854E1 /* UIColor+Helper.m in Sources */,
