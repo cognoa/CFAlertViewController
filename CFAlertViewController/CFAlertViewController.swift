@@ -187,6 +187,7 @@ open class CFAlertViewController: UIViewController    {
     internal var messageString: String?
     internal var messageColor: UIColor = CFAlertViewController.CF_ALERT_DEFAULT_MESSAGE_COLOR()
     internal var actionList = [CFAlertAction]()
+//    internal var selectionList = CFAlertSel
     internal var dismissHandler: CFAlertViewControllerDismissBlock?
     internal var keyboardHeight: CGFloat = 0.0   {
         
@@ -368,7 +369,8 @@ open class CFAlertViewController: UIViewController    {
         tableView?.register(actionCellNib, forCellReuseIdentifier: CFAlertActionTableViewCell.identifier())
         let titleSubtitleCellNib = UINib(nibName: CFAlertTitleSubtitleTableViewCell.identifier(), bundle: Bundle(for: CFAlertTitleSubtitleTableViewCell.self))
         tableView?.register(titleSubtitleCellNib, forCellReuseIdentifier: CFAlertTitleSubtitleTableViewCell.identifier())
-        
+                
+
         // Add Key Value Observer
         tableView?.addObserver(self, forKeyPath: "contentSize", options: [.new, .old, .prior], context: nil)
     }
