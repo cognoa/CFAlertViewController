@@ -144,6 +144,9 @@ public class CFAlertActionTableViewCell: UITableViewCell {
                 
                 // Set Title
                 actionButton?.setTitle(self.action?.title, for: .normal)
+                if let font = self.action?.font {
+                    actionButton?.titleLabel?.font = font
+                }
             }
             else    {
                 // Set Blank Title

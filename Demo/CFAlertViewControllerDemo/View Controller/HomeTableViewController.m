@@ -151,8 +151,10 @@
     // Create Alert
     CFAlertViewController *alert = [[CFAlertViewController alloc] initWithTitle:titleText
                                                                      titleColor:DEFAULT_TITLE_COLOR
+                                                                      titleFont:[UIFont fontWithName:@"Avenir-Medium" size:18]
                                                                         message:descText
                                                                    messageColor:DEFAULT_MESSAGE_COLOR
+                                                                    messageFont:[UIFont fontWithName:@"Avenir-Light" size:18]
                                                                   textAlignment:[self getTextAlignment]
                                                                  preferredStyle:[self getAlertStyle]
                                                                      headerView:headerView
