@@ -12,7 +12,7 @@ import UIKit
     @objc public var title: String = ""    
     @objc public var isSelected: Bool = false
     
-    @objc init(title: String, isSelected: Bool) {        
+    @objc public init(title: String, isSelected: Bool) {        
         self.title = title
         self.isSelected = isSelected
     }
