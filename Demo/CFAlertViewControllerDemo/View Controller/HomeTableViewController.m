@@ -230,6 +230,23 @@
         [alert addAction:actionCancel];
     }
     
+    if (self.settingShowSelectionItems.isOn) {
+        CFAlertSelectionItem *item1 = [[CFAlertSelectionItem alloc] initWithTitle:@"Play with Toys Play with Toys Play with Toys Play with Toys Play with Toys Play with Toys" isSelected:false];
+        CFAlertSelectionItem *item2 = [[CFAlertSelectionItem alloc] initWithTitle:@"Talk with Friends" isSelected:false];
+        CFAlertSelectionItem *item3 = [[CFAlertSelectionItem alloc] initWithTitle:@"Play with Toys" isSelected:false];
+        CFAlertSelectionItem *item4 = [[CFAlertSelectionItem alloc] initWithTitle:@"Talk with Friends" isSelected:false];
+        CFAlertSelectionItem *item5 = [[CFAlertSelectionItem alloc] initWithTitle:@"Play with Toys" isSelected:false];
+        CFAlertSelectionItem *item6 = [[CFAlertSelectionItem alloc] initWithTitle:@"Talk with Friends" isSelected:false];
+        
+        [alert addSelectionItem:item1];
+        [alert addSelectionItem:item2];
+        [alert addSelectionItem:item3];
+        [alert addSelectionItem:item4];
+        [alert addSelectionItem:item5];
+        [alert addSelectionItem:item6];
+        alert.selectionDelegate = self;
+    }
+    
     if (alert.actions.count==0 &&
         titleText == nil &&
         descText == nil &&
@@ -252,22 +269,7 @@
         });
     }
     
-    if (self.settingShowSelectionItems.isOn) {
-        CFAlertSelectionItem *item1 = [[CFAlertSelectionItem alloc] initWithTitle:@"Play with Toys" isSelected:false];
-        CFAlertSelectionItem *item2 = [[CFAlertSelectionItem alloc] initWithTitle:@"Talk with Friends" isSelected:false];
-        CFAlertSelectionItem *item3 = [[CFAlertSelectionItem alloc] initWithTitle:@"Play with Toys" isSelected:false];
-        CFAlertSelectionItem *item4 = [[CFAlertSelectionItem alloc] initWithTitle:@"Talk with Friends" isSelected:false];
-        CFAlertSelectionItem *item5 = [[CFAlertSelectionItem alloc] initWithTitle:@"Play with Toys" isSelected:false];
-        CFAlertSelectionItem *item6 = [[CFAlertSelectionItem alloc] initWithTitle:@"Talk with Friends" isSelected:false];
 
-        [alert addSelectionItem:item1];
-        [alert addSelectionItem:item2];
-        [alert addSelectionItem:item3];
-        [alert addSelectionItem:item4];
-        [alert addSelectionItem:item5];
-        [alert addSelectionItem:item6];
-        alert.selectionDelegate = self;
-    }
 }
 
 

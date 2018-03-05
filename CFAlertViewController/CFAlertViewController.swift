@@ -533,10 +533,10 @@ open class CFAlertViewController: UIViewController    {
             // Simulate Cancel Button
             for existingAction: CFAlertAction in self.actionList {
                 if existingAction.style == .Cancel {
-                    // Call Action Handler
-                    if let actionHandler = existingAction.handler {
-                        actionHandler(existingAction)
-                    }
+                    // Changed from original to NOT call action handler on background tap, simply dismiss:
+//                    if let actionHandler = existingAction.handler {
+//                        actionHandler(existingAction)
+//                    }
                 }
             }
             // Call Completion
