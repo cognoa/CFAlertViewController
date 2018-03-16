@@ -134,8 +134,10 @@ open class CFAlertViewController: UIViewController    {
     @objc public var selectionItems = [CFAlertSelectionItem]()
     @objc public var selectionDelegate: CFAlertViewControllerSelectionDelegate?
     
-    @objc public var webView: WKWebView?
-    
+    @objc public var webView: WKWebView? {
+        didSet { configureWebView() }
+    }
+
     internal var _headerView : UIView?
     @objc public var headerView: UIView?  {
         set {
@@ -446,8 +448,7 @@ open class CFAlertViewController: UIViewController    {
         tableView?.register(titleSubtitleCellNib, forCellReuseIdentifier: CFAlertTitleSubtitleTableViewCell.identifier())
         let selectionCellNib = UINib(nibName: CFAlertActionSelectionTableViewCell.identifier(), bundle: Bundle(for: CFAlertTitleSubtitleTableViewCell.self))
         tableView?.register(selectionCellNib, forCellReuseIdentifier: CFAlertActionSelectionTableViewCell.identifier())
-        let webViewNib = UINib(nibName: CFAlertWebViewTableViewCell.identifier(), bundle: Bundle(for: CFAlertWebViewTableViewCell.self))
-        tableView?.register(webViewNib, forCellReuseIdentifier: CFAlertWebViewTableViewCell.identifier())
+        tableView?.register(CFAlertWebViewTableViewCell.self, forCellReuseIdentifier: "CFAlertWebViewTableViewCell")
         
         // Add Key Value Observer
         tableView?.addObserver(self, forKeyPath: "contentSize", options: [.new, .old, .prior], context: nil)
@@ -850,15 +851,10 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
             selectionCell?.topSeparatorView.isHidden = indexPath.row == 0 ? false : true
             
         case 2:
-            guard let webViewCell = tableView.dequeueReusableCell(withIdentifier: CFAlertWebViewTableViewCell.identifier()) as? CFAlertWebViewTableViewCell, let webView = webView else {
-                return UITableViewCell()
-            }
-            webViewCell.webView = webView
-            let source = "window.onload = function() { window.webkit.messageHandlers.sizeNotification.postMessage({height: document.body.offsetHeight }) }"
-            let script = WKUserScript(source: source, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
-            webViewCell.webView.configuration.userContentController.addUserScript(script)
-//            webViewCell.webView.configuration.userContentController.add(self, name: "sizeNotification")
-            return webViewCell
+            cell = tableView.dequeueReusableCell(withIdentifier: CFAlertWebViewTableViewCell.identifier()) as? CFAlertWebViewTableViewCell
+            let webViewCell: CFAlertWebViewTableViewCell? = (cell as? CFAlertWebViewTableViewCell)
+            let cellWebView = webView
+            webViewCell?.webView = cellWebView
             
         case 3:
             // Get Action Cell Instance
@@ -940,13 +936,23 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
 
 // MARK: WKScriptMessageHandler
 extension CFAlertViewController: WKScriptMessageHandler {
+    func configureWebView() {
+        guard let webView = self.webView else { return }
+        let source = "window.onload = function() { window.webkit.messageHandlers.sizeNotification.postMessage({height: window.innerHeight }) }"
+        let script = WKUserScript(source: source, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        webView.configuration.userContentController.addUserScript(script)
+        webView.configuration.userContentController.add(self, name: "sizeNotification")
+    }
+
     public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if message.name == "sizeNotification" {
             print("Size Notification Handler Called");
             DispatchQueue.main.async {
                 self.tableView?.beginUpdates()
-                if let body = message.body as? [String: Any], let height = body["height"] as? CGFloat, let heightConstraint = message.webView?.constraints.last {
-                    heightConstraint.constant = height
+                if let body = message.body as? [String: Any], let height = body["height"] as? CGFloat, let webView = message.webView {
+                    self.tableView?.beginUpdates()
+                    webView.heightAnchor.constraint(equalToConstant: height).isActive = true
+                    self.tableView?.endUpdates()
                 }
                 self.tableView?.endUpdates()
             }

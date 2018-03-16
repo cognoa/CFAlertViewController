@@ -61,7 +61,6 @@
 		6BA9A6832020F11700F1A1C8 /* CFAlertActionSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA9A6812020F11700F1A1C8 /* CFAlertActionSelectionTableViewCell.swift */; };
 		6BA9A6842020F11700F1A1C8 /* CFAlertActionSelectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BA9A6822020F11700F1A1C8 /* CFAlertActionSelectionTableViewCell.xib */; };
 		6BB888D2205C642B004C4D30 /* CFAlertWebViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB888D0205C642B004C4D30 /* CFAlertWebViewTableViewCell.swift */; };
-		6BB888D3205C642B004C4D30 /* CFAlertWebViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BB888D1205C642B004C4D30 /* CFAlertWebViewTableViewCell.xib */; };
 		6BB888D4205C74DD004C4D30 /* CFAlertWebViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BB888D0205C642B004C4D30 /* CFAlertWebViewTableViewCell.swift */; };
 		6BE8E1372020FD35005EB1A4 /* CFAlertSelectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA9A67F2020F0CE00F1A1C8 /* CFAlertSelectionItem.swift */; };
 		6BE8E1382020FF07005EB1A4 /* CFAlertActionSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA9A6812020F11700F1A1C8 /* CFAlertActionSelectionTableViewCell.swift */; };
@@ -146,7 +145,6 @@
 		6BA9A6812020F11700F1A1C8 /* CFAlertActionSelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFAlertActionSelectionTableViewCell.swift; sourceTree = "<group>"; };
 		6BA9A6822020F11700F1A1C8 /* CFAlertActionSelectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CFAlertActionSelectionTableViewCell.xib; sourceTree = "<group>"; };
 		6BB888D0205C642B004C4D30 /* CFAlertWebViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFAlertWebViewTableViewCell.swift; sourceTree = "<group>"; };
-		6BB888D1205C642B004C4D30 /* CFAlertWebViewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CFAlertWebViewTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -329,7 +327,6 @@
 				6BA9A6812020F11700F1A1C8 /* CFAlertActionSelectionTableViewCell.swift */,
 				6BA9A6822020F11700F1A1C8 /* CFAlertActionSelectionTableViewCell.xib */,
 				6BB888D0205C642B004C4D30 /* CFAlertWebViewTableViewCell.swift */,
-				6BB888D1205C642B004C4D30 /* CFAlertWebViewTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -514,7 +511,6 @@
 			files = (
 				6BA9A6842020F11700F1A1C8 /* CFAlertActionSelectionTableViewCell.xib in Resources */,
 				2F8E90281D181F07004450F5 /* CFAlertViewController.xib in Resources */,
-				6BB888D3205C642B004C4D30 /* CFAlertWebViewTableViewCell.xib in Resources */,
 				2F8E90241D181F07004450F5 /* CFAlertActionTableViewCell.xib in Resources */,
 				2F8E8FCE1D181166004450F5 /* LaunchScreen.storyboard in Resources */,
 				2F8E90261D181F07004450F5 /* CFAlertTitleSubtitleTableViewCell.xib in Resources */,

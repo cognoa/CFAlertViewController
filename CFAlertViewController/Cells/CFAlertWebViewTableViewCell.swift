@@ -25,9 +25,9 @@ import WebKit
         NSLayoutConstraint.activate([webView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 0.0),
                                      webView.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: 0.0),
                                      webView.leftAnchor.constraint(equalTo: self.contentView.leftAnchor, constant: 0.0),
-                                     webView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: 0.0),
-                                     webView.heightAnchor.constraint(equalToConstant: 60.0)
+                                     webView.rightAnchor.constraint(equalTo: self.contentView.rightAnchor, constant: 0.0)
             ])
+        self.contentView.setNeedsLayout()
     }
     @objc public static func identifier() -> String    {
         return String(describing: CFAlertWebViewTableViewCell.self)
