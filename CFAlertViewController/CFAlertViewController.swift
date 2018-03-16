@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WebKit
 
 @objc public protocol CFAlertViewControllerSelectionDelegate {
     @objc func selectionItemChanged(selectionItems: [CFAlertSelectionItem], at indexPath: IndexPath, selected: Bool)
@@ -132,6 +133,8 @@ open class CFAlertViewController: UIViewController    {
     }
     @objc public var selectionItems = [CFAlertSelectionItem]()
     @objc public var selectionDelegate: CFAlertViewControllerSelectionDelegate?
+    
+    @objc public var webView: WKWebView?
     
     internal var _headerView : UIView?
     @objc public var headerView: UIView?  {
@@ -427,15 +430,15 @@ open class CFAlertViewController: UIViewController    {
     
     // MARK: - View Life Cycle Methods
     internal func loadVariables() {
-        
+
         // Register For Keyboard Notification Observer
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
+
         // Text Field & Text View Notifications
         NotificationCenter.default.addObserver(self, selector: #selector(textViewOrTextFieldDidBeginEditing), name: NSNotification.Name.UITextFieldTextDidBeginEditing, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(textViewOrTextFieldDidBeginEditing), name: NSNotification.Name.UITextViewTextDidBeginEditing, object: nil)
-        
+
         // Register Cells For Table
         let actionCellNib = UINib(nibName: CFAlertActionTableViewCell.identifier(), bundle: Bundle(for: CFAlertActionTableViewCell.self))
         tableView?.register(actionCellNib, forCellReuseIdentifier: CFAlertActionTableViewCell.identifier())
@@ -443,11 +446,13 @@ open class CFAlertViewController: UIViewController    {
         tableView?.register(titleSubtitleCellNib, forCellReuseIdentifier: CFAlertTitleSubtitleTableViewCell.identifier())
         let selectionCellNib = UINib(nibName: CFAlertActionSelectionTableViewCell.identifier(), bundle: Bundle(for: CFAlertTitleSubtitleTableViewCell.self))
         tableView?.register(selectionCellNib, forCellReuseIdentifier: CFAlertActionSelectionTableViewCell.identifier())
+        let webViewNib = UINib(nibName: CFAlertWebViewTableViewCell.identifier(), bundle: Bundle(for: CFAlertWebViewTableViewCell.self))
+        tableView?.register(webViewNib, forCellReuseIdentifier: CFAlertWebViewTableViewCell.identifier())
         
         // Add Key Value Observer
         tableView?.addObserver(self, forKeyPath: "contentSize", options: [.new, .old, .prior], context: nil)
     }
-    
+
     internal func loadDisplayContent() {
         
         // Reload Background Color
@@ -520,6 +525,12 @@ open class CFAlertViewController: UIViewController    {
             return
         }
         selectionItems.append(item)
+    }
+    
+    @objc public func setWebViewHTML(html: String) {
+        let webView = WKWebView(frame: CGRect.zero, configuration: WKWebViewConfiguration())
+        webView.loadHTMLString(html, baseURL: nil)
+        self.webView = webView
     }
     
     @objc public func dismissAlert(withAnimation animate: Bool, completion: (() -> Void)?) {
@@ -779,13 +790,12 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
     
     // MARK: - UITableViewDataSource
     public func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         switch section {
-            
         case 0:
             if let titleString = self.titleString, !titleString.isEmpty {
                 return 1
@@ -796,8 +806,11 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
             
         case 1:
             return selectionItems.count
-            
+        
         case 2:
+            return webView != nil ? 1 : 0
+
+        case 3:
             return self.actionList.count
             
         default:
@@ -837,6 +850,17 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
             selectionCell?.topSeparatorView.isHidden = indexPath.row == 0 ? false : true
             
         case 2:
+            guard let webViewCell = tableView.dequeueReusableCell(withIdentifier: CFAlertWebViewTableViewCell.identifier()) as? CFAlertWebViewTableViewCell, let webView = webView else {
+                return UITableViewCell()
+            }
+            webViewCell.webView = webView
+            let source = "window.onload = function() { window.webkit.messageHandlers.sizeNotification.postMessage({height: document.body.offsetHeight }) }"
+            let script = WKUserScript(source: source, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+            webViewCell.webView.configuration.userContentController.addUserScript(script)
+//            webViewCell.webView.configuration.userContentController.add(self, name: "sizeNotification")
+            return webViewCell
+            
+        case 3:
             // Get Action Cell Instance
             cell = tableView.dequeueReusableCell(withIdentifier: CFAlertActionTableViewCell.identifier())
             let actionCell: CFAlertActionTableViewCell? = (cell as? CFAlertActionTableViewCell)
@@ -909,6 +933,24 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
         }
         let item = selectionItems[selectionIndexPath.row]
         selectionDelegate?.selectionItemChanged(selectionItems: selectionItems, at: selectionIndexPath, selected: item.isSelected)
+    }
+}
+
+
+
+// MARK: WKScriptMessageHandler
+extension CFAlertViewController: WKScriptMessageHandler {
+    public func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        if message.name == "sizeNotification" {
+            print("Size Notification Handler Called");
+            DispatchQueue.main.async {
+                self.tableView?.beginUpdates()
+                if let body = message.body as? [String: Any], let height = body["height"] as? CGFloat, let heightConstraint = message.webView?.constraints.last {
+                    heightConstraint.constant = height
+                }
+                self.tableView?.endUpdates()
+            }
+        }
     }
 }
 
