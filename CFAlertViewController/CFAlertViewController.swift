@@ -528,9 +528,24 @@ open class CFAlertViewController: UIViewController    {
         selectionItems.append(item)
     }
     
-    @objc public func setWebViewHTML(html: String) {
+    @objc public func setWebViewHTML(html: String, cssText: String?) {
         let webView = WKWebView(frame: CGRect.zero, configuration: WKWebViewConfiguration())
+        if let styleContent = cssText,
+            let scriptURL = Bundle.main.path(forResource: "standardAlertView", ofType: "js"),
+            let scriptContent = try? String.init(contentsOfFile: scriptURL)
+        {
+            let mergedContent = String.init(format: scriptContent,
+                                            styleContent.replacingOccurrences(of: "\n", with: " ") // Get unexpected EOF if we don't replace the \n
+                                                .replacingOccurrences(of: "\\", with: "\\\\") // Escape backslashes for things like "\f05a" in CSS
+                                                .replacingOccurrences(of: "'", with: "\\'")) // Escaping single quotes so we can inject this
+            webView.configuration.userContentController.addUserScript(WKUserScript(source: mergedContent, injectionTime: .atDocumentEnd, forMainFrameOnly: true))
+        }
+
         webView.loadHTMLString(html, baseURL: nil)
+        self.webView = webView
+    }
+    
+    @objc public func setWebView(webView: WKWebView) {
         self.webView = webView
     }
     
