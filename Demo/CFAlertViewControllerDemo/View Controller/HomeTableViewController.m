@@ -63,7 +63,6 @@
 @property (weak, nonatomic) IBOutlet UISwitch *settingAddHeaderSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *settingAddFooterSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *settingShowSelectionItems;
-@property (weak, nonatomic) IBOutlet UISwitch *settingShowWebView;
 
 @end
 
@@ -248,13 +247,6 @@
         alert.selectionDelegate = self;
     }
     
-    if (self.settingShowWebView.isOn) {
-        NSString *sampleHTML = @"<div class=seeking_help_dialog_api><div class=text><p>Hi there,</div><div class=text><p>As you manage your child’s developmental challenges and need to navigate the complex system of healthcare providers, Cognoa is here to help you. We have laid out the steps for you to take from the time of your initial concern all the way to getting a diagnosis and intervention services.</div></div>";
-        WKWebView *webView =  [[WKWebView alloc] initWithFrame:CGRectZero configuration:[WKWebViewConfiguration new]];
-        [webView loadHTMLString:sampleHTML baseURL:nil];
-        [alert setWebViewWithWebView:webView];
-    }
-    
     if (alert.actions.count==0 &&
         titleText == nil &&
         descText == nil &&
@@ -381,8 +373,7 @@
 }
 
 #pragma mark - CFAlertActionSelectionTableViewCellDelegate
-- (void) selectionItemChangedWithSelectionItems:(NSArray<CFAlertSelectionItem *> *)selectionItems at:(NSIndexPath *)indexPath selected:(BOOL)selected {
-    NSLog(@"Item changed at indexpath: %@\tSelected: %d", indexPath, selected);
+- (void) selectionItemChangedWithSelectionItems:(NSArray<CFAlertSelectionItem *> *)selectionItems at:(NSIndexPath *)indexPath selected:(BOOL)selected {    
 }
 
 

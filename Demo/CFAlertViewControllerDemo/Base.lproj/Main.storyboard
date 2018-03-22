@@ -395,32 +395,6 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="uIF-CU-NBU">
-                                        <rect key="frame" x="0.0" y="959.5" width="375" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uIF-CU-NBU" id="S3N-Ns-TgR">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Sample WebView" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gUR-mc-8VY">
-                                                    <rect key="frame" x="15" y="11" width="179" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gjO-5G-MF8">
-                                                    <rect key="frame" x="311" y="6.5" width="51" height="31"/>
-                                                </switch>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="gjO-5G-MF8" firstAttribute="centerY" secondItem="S3N-Ns-TgR" secondAttribute="centerY" id="5rT-3a-FSn"/>
-                                                <constraint firstItem="gUR-mc-8VY" firstAttribute="centerY" secondItem="S3N-Ns-TgR" secondAttribute="centerY" id="6p6-A4-9Ip"/>
-                                                <constraint firstItem="gjO-5G-MF8" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gUR-mc-8VY" secondAttribute="trailing" constant="20" id="H50-k5-xQl"/>
-                                                <constraint firstAttribute="trailing" secondItem="gjO-5G-MF8" secondAttribute="trailing" constant="15" id="jhC-dy-WQu"/>
-                                                <constraint firstItem="gUR-mc-8VY" firstAttribute="leading" secondItem="S3N-Ns-TgR" secondAttribute="leading" constant="15" id="nk7-UK-kdE"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -455,7 +429,6 @@
                         <outlet property="settingAddHeaderSwitch" destination="EQw-uE-p0m" id="1L2-Lb-5U8"/>
                         <outlet property="settingCloseOnBackgroundTapSwitch" destination="mgc-Y1-uDZ" id="pn7-Jw-F6A"/>
                         <outlet property="settingShowSelectionItems" destination="93Q-6o-TdO" id="0tn-6p-c9h"/>
-                        <outlet property="settingShowWebView" destination="gjO-5G-MF8" id="bcI-zO-NeX"/>
                         <outlet property="textAlignmentSegment" destination="EaP-IP-Zb5" id="wxb-A6-pTi"/>
                         <outlet property="titleTextfield" destination="KFV-aS-6dI" id="8pl-BA-Usm"/>
                     </connections>
