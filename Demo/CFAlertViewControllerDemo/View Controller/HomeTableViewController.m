@@ -250,7 +250,9 @@
     
     if (self.settingShowWebView.isOn) {
         NSString *sampleHTML = @"<div class=seeking_help_dialog_api><div class=text><p>Hi there,</div><div class=text><p>As you manage your child’s developmental challenges and need to navigate the complex system of healthcare providers, Cognoa is here to help you. We have laid out the steps for you to take from the time of your initial concern all the way to getting a diagnosis and intervention services.</div></div>";
-        [alert setWebViewHTMLWithHtml:sampleHTML cssText:@"" ];
+        WKWebView *webView =  [[WKWebView alloc] initWithFrame:CGRectZero configuration:[WKWebViewConfiguration new]];
+        [webView loadHTMLString:sampleHTML baseURL:nil];
+        [alert setWebViewWithWebView:webView];
     }
     
     if (alert.actions.count==0 &&

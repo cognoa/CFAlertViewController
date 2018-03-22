@@ -963,13 +963,13 @@ extension CFAlertViewController: WKScriptMessageHandler {
         if message.name == "sizeNotification" {
             print("Size Notification Handler Called");
             DispatchQueue.main.async {
-                self.tableView?.beginUpdates()
                 if let body = message.body as? [String: Any], let height = body["height"] as? CGFloat, let webView = message.webView {
-                    self.tableView?.beginUpdates()
-                    webView.heightAnchor.constraint(equalToConstant: height).isActive = true
+                    self.tableView?.beginUpdates()                    
+                    let heightConstraint = NSLayoutConstraint(item: webView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1.0, constant: height)
+                    heightConstraint.priority = UILayoutPriority.defaultHigh
+                    heightConstraint.isActive = true
                     self.tableView?.endUpdates()
                 }
-                self.tableView?.endUpdates()
             }
         }
     }
