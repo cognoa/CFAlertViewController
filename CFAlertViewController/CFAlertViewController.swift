@@ -577,6 +577,9 @@ open class CFAlertViewController: UIViewController    {
         // Set Into Table Header View
         if let tableView = tableView    {
             tableView.tableHeaderView = self.headerView
+            if self.headerView != nil {
+                tableView.delaysContentTouches = false
+            }
             // Update Container View Frame If Requested
             if shouldUpdateContainerFrame {
                 updateContainerViewFrame(withAnimation: animate)
