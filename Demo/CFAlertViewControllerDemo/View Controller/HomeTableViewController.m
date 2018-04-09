@@ -33,6 +33,7 @@
 #define CANCEL_BTN_COLOR            [[UIColor grayColor] colorWithAlphaComponent:0.3]
 #define CANCEL_BTN_TITLE_COLOR      [UIColor grayColor]
 
+#define CANCEL_NO_BORDER_BTN_TITLE  @"CANCEL NO BORDER"
 
 
 @interface HomeTableViewController () <ColorPickerTableViewControllerDelegate, CFAlertViewControllerSelectionDelegate>
@@ -52,6 +53,8 @@
 @property (weak, nonatomic) IBOutlet UISwitch *actionDefaultSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *actionCancelSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *actionDestructiveSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *actionCancelNoBorderSwitch;
+
 @property (weak, nonatomic) IBOutlet UISegmentedControl *actionAlignmentSegment;
 
 // Background Overlay
@@ -221,6 +224,19 @@
     if (self.actionCancelSwitch.isOn) {
         CFAlertAction *actionCancel = [[CFAlertAction alloc] initWithTitle:CANCEL_BTN_TITLE
                                                                      style:CFAlertActionStyleCancel
+                                                                 alignment:[self getActionsTextAlignment]
+                                                           backgroundColor:CANCEL_BTN_COLOR
+                                                                 textColor:CANCEL_BTN_TITLE_COLOR
+                                                                   handler:^(CFAlertAction * _Nonnull action) {
+                                                                       NSLog(@"Action Button Clicked [%@]", action.title);
+                                                                   }];
+        [alert addAction:actionCancel];
+    }
+    
+    // Add CancelNoBorder Button Action
+    if (self.actionCancelSwitch.isOn) {
+        CFAlertAction *actionCancel = [[CFAlertAction alloc] initWithTitle:CANCEL_BTN_TITLE
+                                                                     style:CFAlertActionStyleCancelNoBorder
                                                                  alignment:[self getActionsTextAlignment]
                                                            backgroundColor:CANCEL_BTN_COLOR
                                                                  textColor:CANCEL_BTN_TITLE_COLOR

@@ -17,6 +17,7 @@ open class CFAlertAction: NSObject, NSCopying {
     @objc public enum CFAlertActionStyle: Int {
         case Default = 0
         case Cancel
+        case CancelNoBorder
         case Destructive
     }
     

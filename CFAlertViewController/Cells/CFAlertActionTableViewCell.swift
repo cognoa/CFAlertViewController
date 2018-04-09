@@ -80,6 +80,18 @@ public class CFAlertActionTableViewCell: UITableViewCell {
                     actionButton?.layer.borderColor = actionBackgroundColor?.cgColor
                     actionButton?.layer.borderWidth = 1.0
                     
+                case .CancelNoBorder:
+                    if actionBackgroundColor == nil {
+                        actionBackgroundColor = CFAlertActionTableViewCell.CF_CANCEL_ACTION_COLOR()
+                    }
+                    if actionTextColor == nil {
+                        actionTextColor = CFAlertActionTableViewCell.CF_CANCEL_ACTION_TEXT_COLOR()
+                    }
+                    actionButton?.backgroundColor = UIColor.clear
+                    actionButton?.setTitleColor(actionTextColor, for: .normal)
+                    actionButton?.layer.borderColor = UIColor.clear.cgColor
+                    actionButton?.layer.borderWidth = 0.0
+                    
                 case .Destructive:
                     if actionBackgroundColor == nil {
                         actionBackgroundColor = CFAlertActionTableViewCell.CF_DESTRUCTIVE_ACTION_COLOR()
