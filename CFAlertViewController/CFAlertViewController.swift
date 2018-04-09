@@ -577,9 +577,6 @@ open class CFAlertViewController: UIViewController    {
         // Set Into Table Header View
         if let tableView = tableView    {
             tableView.tableHeaderView = self.headerView
-            if self.headerView != nil {
-                tableView.delaysContentTouches = false
-            }
             // Update Container View Frame If Requested
             if shouldUpdateContainerFrame {
                 updateContainerViewFrame(withAnimation: animate)
@@ -608,6 +605,7 @@ open class CFAlertViewController: UIViewController    {
         // Update Table Footer View
         setFooterView(footerView, shouldUpdateContainerFrame: false, withAnimation: false)
         // Reload Table Content
+        tableView?.delaysContentTouches = false
         tableView?.reloadData()
         // Update Background Style
         let currentBackgroundStyle = backgroundStyle
@@ -643,7 +641,7 @@ open class CFAlertViewController: UIViewController    {
     internal func updateContainerViewFrame() {
         
         if let tableView = self.tableView   {
-            
+             tableView.delaysContentTouches = false
             // Update Table View Height
             var tableContentHeight = tableView.contentInset.top + tableView.contentSize.height + tableView.contentInset.bottom
             if #available(iOS 11.0, *), preferredStyle == .notification {
