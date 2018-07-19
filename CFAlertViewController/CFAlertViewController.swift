@@ -12,6 +12,10 @@ import UIKit
     @objc func selectionItemChanged(selectionItems: [CFAlertSelectionItem], at indexPath: IndexPath, selected: Bool)
 }
 
+@objc public protocol CFAlertViewControllerUniqueSelectionDelegate {
+    @objc func uniqueSelectionItemChanged(uniqueSelectionItems: [CFAlertUniqueSelectionItem], indexPath: IndexPath, selected: Bool)
+}
+
 open class CFAlertViewController: UIViewController    {
     
     // MARK: - Declarations
@@ -132,6 +136,9 @@ open class CFAlertViewController: UIViewController    {
     }
     @objc public var selectionItems = [CFAlertSelectionItem]()
     @objc public var selectionDelegate: CFAlertViewControllerSelectionDelegate?
+    
+    @objc public var uniqueSelectionItems = [CFAlertUniqueSelectionItem]()
+    @objc public var uniqueSelectionDelegate: CFAlertViewControllerUniqueSelectionDelegate?
     
     internal var _headerView : UIView?
     @objc public var headerView: UIView?  {
@@ -443,7 +450,9 @@ open class CFAlertViewController: UIViewController    {
         tableView?.register(titleSubtitleCellNib, forCellReuseIdentifier: CFAlertTitleSubtitleTableViewCell.identifier())
         let selectionCellNib = UINib(nibName: CFAlertActionSelectionTableViewCell.identifier(), bundle: Bundle(for: CFAlertTitleSubtitleTableViewCell.self))
         tableView?.register(selectionCellNib, forCellReuseIdentifier: CFAlertActionSelectionTableViewCell.identifier())
-        
+        let uniqueSelectionNib = UINib(nibName: CFAlertActionUniqueSelectionTableViewCell.identifier(), bundle: Bundle(for: CFAlertActionUniqueSelectionTableViewCell.self))
+        tableView?.register(uniqueSelectionNib, forCellReuseIdentifier: CFAlertActionUniqueSelectionTableViewCell.identifier())
+
         // Add Key Value Observer
         tableView?.addObserver(self, forKeyPath: "contentSize", options: [.new, .old, .prior], context: nil)
     }
@@ -520,6 +529,10 @@ open class CFAlertViewController: UIViewController    {
             return
         }
         selectionItems.append(item)
+    }
+    
+    @objc public func addUniqueSelectionItem(item: CFAlertUniqueSelectionItem) {
+        uniqueSelectionItems.append(item)
     }
     
     @objc public func dismissAlert(withAnimation animate: Bool, completion: (() -> Void)?) {
@@ -776,11 +789,11 @@ open class CFAlertViewController: UIViewController    {
 }
 
 
-extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFAlertActionTableViewCellDelegate, CFAlertActionSelectionTableViewCellDelegate {
+extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFAlertActionTableViewCellDelegate, CFAlertActionSelectionTableViewCellDelegate, CFAlertActionUniqueSelectionTableViewCellDelegate {
     
     // MARK: - UITableViewDataSource
     public func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -799,6 +812,9 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
             return selectionItems.count
             
         case 2:
+            return uniqueSelectionItems.count
+            
+        case 3:
             return self.actionList.count
             
         default:
@@ -838,6 +854,12 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
             selectionCell?.topSeparatorView.isHidden = indexPath.row == 0 ? false : true
             
         case 2:
+            cell = tableView.dequeueReusableCell(withIdentifier: CFAlertActionUniqueSelectionTableViewCell.identifier())
+            let uniqueSelectionCell: CFAlertActionUniqueSelectionTableViewCell? = cell as? CFAlertActionUniqueSelectionTableViewCell
+            uniqueSelectionCell?.selectionItem = uniqueSelectionItems[indexPath.row]
+            uniqueSelectionCell?.delegate = self
+            
+        case 3:
             // Get Action Cell Instance
             cell = tableView.dequeueReusableCell(withIdentifier: CFAlertActionTableViewCell.identifier())
             let actionCell: CFAlertActionTableViewCell? = (cell as? CFAlertActionTableViewCell)
@@ -910,6 +932,21 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
         }
         let item = selectionItems[selectionIndexPath.row]
         selectionDelegate?.selectionItemChanged(selectionItems: selectionItems, at: selectionIndexPath, selected: item.isSelected)
+    }
+    
+    public func uniqueSelectionItemCellSelected(cell: CFAlertActionUniqueSelectionTableViewCell, selectionItem: CFAlertUniqueSelectionItem?) {
+        guard let selectionIndexPath = self.tableView?.indexPath(for: cell) else {
+            return
+        }
+        for (index, item) in self.uniqueSelectionItems.enumerated() {
+            item.isSelected = index == selectionIndexPath.row ? true : false
+            let tempIndexPath = IndexPath(row: index, section: 2)
+            if let cell = tableView?.cellForRow(at: tempIndexPath) as? CFAlertActionUniqueSelectionTableViewCell {
+                cell.selectionItem = item
+            }
+        }
+        uniqueSelectionDelegate?.uniqueSelectionItemChanged(uniqueSelectionItems: uniqueSelectionItems, indexPath: selectionIndexPath, selected: true)
+        tableView?.reloadData()
     }
 }
 

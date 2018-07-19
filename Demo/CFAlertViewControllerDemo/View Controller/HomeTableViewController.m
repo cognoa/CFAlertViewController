@@ -66,6 +66,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *settingAddHeaderSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *settingAddFooterSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *settingShowSelectionItems;
+@property (weak, nonatomic) IBOutlet UISwitch *settingShowUniqueSelectionItems;
 
 @end
 
@@ -261,6 +262,15 @@
         [alert addSelectionItem:item5];
         [alert addSelectionItem:item6];
         alert.selectionDelegate = self;
+    }
+    
+    if (self.settingShowUniqueSelectionItems.isOn) {
+        CFAlertUniqueSelectionItem *item1 = [[CFAlertUniqueSelectionItem alloc] initWithTitle:@"Item 1" isSelected:NO];
+        CFAlertUniqueSelectionItem *item2 = [[CFAlertUniqueSelectionItem alloc] initWithTitle:@"Item 2" isSelected:NO];
+        CFAlertUniqueSelectionItem *item3 = [[CFAlertUniqueSelectionItem alloc] initWithTitle:@"Item 3" isSelected:NO];
+        [alert addUniqueSelectionItemWithItem:item1];
+        [alert addUniqueSelectionItemWithItem:item2];
+        [alert addUniqueSelectionItemWithItem:item3];
     }
     
     if (alert.actions.count==0 &&
