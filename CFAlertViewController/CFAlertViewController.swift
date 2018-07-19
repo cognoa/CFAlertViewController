@@ -16,6 +16,10 @@ import UIKit
     @objc func uniqueSelectionItemChanged(uniqueSelectionItems: [CFAlertUniqueSelectionItem], indexPath: IndexPath, selected: Bool)
 }
 
+@objc public protocol CFAlertViewControllerDatePickerDelegate {
+    @objc func datePickerSelectionChanged(date: Date, datePicker: UIDatePicker)
+}
+
 open class CFAlertViewController: UIViewController    {
     
     // MARK: - Declarations
@@ -139,6 +143,9 @@ open class CFAlertViewController: UIViewController    {
     
     @objc public var uniqueSelectionItems = [CFAlertUniqueSelectionItem]()
     @objc public var uniqueSelectionDelegate: CFAlertViewControllerUniqueSelectionDelegate?
+    
+    @objc public var showDatePicker: Bool = false
+    @objc public var datePickerDelegate: CFAlertViewControllerDatePickerDelegate?
     
     internal var _headerView : UIView?
     @objc public var headerView: UIView?  {
@@ -452,7 +459,9 @@ open class CFAlertViewController: UIViewController    {
         tableView?.register(selectionCellNib, forCellReuseIdentifier: CFAlertActionSelectionTableViewCell.identifier())
         let uniqueSelectionNib = UINib(nibName: CFAlertActionUniqueSelectionTableViewCell.identifier(), bundle: Bundle(for: CFAlertActionUniqueSelectionTableViewCell.self))
         tableView?.register(uniqueSelectionNib, forCellReuseIdentifier: CFAlertActionUniqueSelectionTableViewCell.identifier())
-
+        let datePickerNib = UINib(nibName: CFAlertActionDatePickerViewTableViewCell.identifier(), bundle: Bundle(for: CFAlertActionDatePickerViewTableViewCell.self))
+        tableView?.register(datePickerNib, forCellReuseIdentifier: CFAlertActionDatePickerViewTableViewCell.identifier())
+        
         // Add Key Value Observer
         tableView?.addObserver(self, forKeyPath: "contentSize", options: [.new, .old, .prior], context: nil)
     }
@@ -789,11 +798,11 @@ open class CFAlertViewController: UIViewController    {
 }
 
 
-extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFAlertActionTableViewCellDelegate, CFAlertActionSelectionTableViewCellDelegate, CFAlertActionUniqueSelectionTableViewCellDelegate {
+extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFAlertActionTableViewCellDelegate, CFAlertActionSelectionTableViewCellDelegate, CFAlertActionUniqueSelectionTableViewCellDelegate, CFAlertActionDatePickerViewTableViewCellDelegate {
     
     // MARK: - UITableViewDataSource
     public func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return 5
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -815,6 +824,9 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
             return uniqueSelectionItems.count
             
         case 3:
+            return showDatePicker ? 1 : 0
+            
+        case 4:
             return self.actionList.count
             
         default:
@@ -859,7 +871,11 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
             uniqueSelectionCell?.selectionItem = uniqueSelectionItems[indexPath.row]
             uniqueSelectionCell?.delegate = self
             
-        case 3:
+        case 3: cell = tableView.dequeueReusableCell(withIdentifier: CFAlertActionDatePickerViewTableViewCell.identifier())
+            let dateCell = cell as? CFAlertActionDatePickerViewTableViewCell
+            dateCell?.delegate = self
+            
+        case 4:
             // Get Action Cell Instance
             cell = tableView.dequeueReusableCell(withIdentifier: CFAlertActionTableViewCell.identifier())
             let actionCell: CFAlertActionTableViewCell? = (cell as? CFAlertActionTableViewCell)
@@ -947,6 +963,10 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
         }
         uniqueSelectionDelegate?.uniqueSelectionItemChanged(uniqueSelectionItems: uniqueSelectionItems, indexPath: selectionIndexPath, selected: true)
         tableView?.reloadData()
+    }
+    
+    public func datePickerCellDateSelected(cell: CFAlertActionDatePickerViewTableViewCell, date: Date, datePicker: UIDatePicker) {
+        datePickerDelegate?.datePickerSelectionChanged(date: date, datePicker: datePicker)
     }
 }
 

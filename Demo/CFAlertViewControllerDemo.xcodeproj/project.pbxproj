@@ -63,6 +63,9 @@
 		6B5AA25E2101189A002A6BCE /* CFAlertUniqueSelectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5AA25D2101189A002A6BCE /* CFAlertUniqueSelectionItem.swift */; };
 		6B5AA25F21011AA8002A6BCE /* CFAlertUniqueSelectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5AA25D2101189A002A6BCE /* CFAlertUniqueSelectionItem.swift */; };
 		6B5AA26021011AC9002A6BCE /* CFAlertActionUniqueSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5AA25921010EDF002A6BCE /* CFAlertActionUniqueSelectionTableViewCell.swift */; };
+		6B5AA263210132BC002A6BCE /* CFAlertActionDatePickerViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5AA261210132BC002A6BCE /* CFAlertActionDatePickerViewTableViewCell.swift */; };
+		6B5AA264210132BC002A6BCE /* CFAlertActionDatePickerViewTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B5AA262210132BC002A6BCE /* CFAlertActionDatePickerViewTableViewCell.xib */; };
+		6B5AA26521013630002A6BCE /* CFAlertActionDatePickerViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5AA261210132BC002A6BCE /* CFAlertActionDatePickerViewTableViewCell.swift */; };
 		6BA9A6802020F0CE00F1A1C8 /* CFAlertSelectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA9A67F2020F0CE00F1A1C8 /* CFAlertSelectionItem.swift */; };
 		6BA9A6832020F11700F1A1C8 /* CFAlertActionSelectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BA9A6812020F11700F1A1C8 /* CFAlertActionSelectionTableViewCell.swift */; };
 		6BA9A6842020F11700F1A1C8 /* CFAlertActionSelectionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BA9A6822020F11700F1A1C8 /* CFAlertActionSelectionTableViewCell.xib */; };
@@ -151,6 +154,8 @@
 		6B5AA25921010EDF002A6BCE /* CFAlertActionUniqueSelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFAlertActionUniqueSelectionTableViewCell.swift; sourceTree = "<group>"; };
 		6B5AA25A21010EDF002A6BCE /* CFAlertActionUniqueSelectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CFAlertActionUniqueSelectionTableViewCell.xib; sourceTree = "<group>"; };
 		6B5AA25D2101189A002A6BCE /* CFAlertUniqueSelectionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFAlertUniqueSelectionItem.swift; sourceTree = "<group>"; };
+		6B5AA261210132BC002A6BCE /* CFAlertActionDatePickerViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFAlertActionDatePickerViewTableViewCell.swift; sourceTree = "<group>"; };
+		6B5AA262210132BC002A6BCE /* CFAlertActionDatePickerViewTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CFAlertActionDatePickerViewTableViewCell.xib; sourceTree = "<group>"; };
 		6BA9A67F2020F0CE00F1A1C8 /* CFAlertSelectionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFAlertSelectionItem.swift; sourceTree = "<group>"; };
 		6BA9A6812020F11700F1A1C8 /* CFAlertActionSelectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CFAlertActionSelectionTableViewCell.swift; sourceTree = "<group>"; };
 		6BA9A6822020F11700F1A1C8 /* CFAlertActionSelectionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CFAlertActionSelectionTableViewCell.xib; sourceTree = "<group>"; };
@@ -338,6 +343,8 @@
 				6BA9A6822020F11700F1A1C8 /* CFAlertActionSelectionTableViewCell.xib */,
 				6B5AA25921010EDF002A6BCE /* CFAlertActionUniqueSelectionTableViewCell.swift */,
 				6B5AA25A21010EDF002A6BCE /* CFAlertActionUniqueSelectionTableViewCell.xib */,
+				6B5AA261210132BC002A6BCE /* CFAlertActionDatePickerViewTableViewCell.swift */,
+				6B5AA262210132BC002A6BCE /* CFAlertActionDatePickerViewTableViewCell.xib */,
 				6BB888D0205C642B004C4D30 /* CFAlertWebViewTableViewCell.swift */,
 				6B14CE1F206422A400571D17 /* standardAlertView.js */,
 			);
@@ -527,6 +534,7 @@
 				2F8E90281D181F07004450F5 /* CFAlertViewController.xib in Resources */,
 				6B14CE20206422A400571D17 /* standardAlertView.js in Resources */,
 				2F8E90241D181F07004450F5 /* CFAlertActionTableViewCell.xib in Resources */,
+				6B5AA264210132BC002A6BCE /* CFAlertActionDatePickerViewTableViewCell.xib in Resources */,
 				2F8E8FCE1D181166004450F5 /* LaunchScreen.storyboard in Resources */,
 				2F8E90261D181F07004450F5 /* CFAlertTitleSubtitleTableViewCell.xib in Resources */,
 				2F8E90021D1811C7004450F5 /* CustomFooterView.xib in Resources */,
@@ -569,6 +577,7 @@
 				2F6298A11F5FF8B70010273C /* ShareViewController.swift in Sources */,
 				2FC771F11F5FFC6A00D854E1 /* HomeTableViewController.m in Sources */,
 				6B5AA25F21011AA8002A6BCE /* CFAlertUniqueSelectionItem.swift in Sources */,
+				6B5AA26521013630002A6BCE /* CFAlertActionDatePickerViewTableViewCell.swift in Sources */,
 				2FC771ED1F5FF9C300D854E1 /* CFAlertPopupTransition.swift in Sources */,
 				2FC771EB1F5FF9C300D854E1 /* CFAlertNotificationTransitionGestureRecognizer.swift in Sources */,
 				2FC771EF1F5FF9C300D854E1 /* CFAlertActionSheetInteractiveTransition.swift in Sources */,
@@ -589,6 +598,7 @@
 				6BA9A6802020F0CE00F1A1C8 /* CFAlertSelectionItem.swift in Sources */,
 				6B5AA25B21010EDF002A6BCE /* CFAlertActionUniqueSelectionTableViewCell.swift in Sources */,
 				40102FEF1E30EC4900B63602 /* CFAlertTitleSubtitleTableViewCell.swift in Sources */,
+				6B5AA263210132BC002A6BCE /* CFAlertActionDatePickerViewTableViewCell.swift in Sources */,
 				2FD0E84D1E6FD8BD00F98307 /* UIColor+Helper.m in Sources */,
 				2F88C5881F5E978A006F054A /* CFAlertActionSheetTransitionGestureRecognizer.swift in Sources */,
 				2F88C5841F5E6A17006F054A /* CFAlertPopupTransition.swift in Sources */,

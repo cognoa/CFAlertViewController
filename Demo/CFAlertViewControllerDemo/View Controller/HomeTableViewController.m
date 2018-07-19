@@ -67,6 +67,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *settingAddFooterSwitch;
 @property (weak, nonatomic) IBOutlet UISwitch *settingShowSelectionItems;
 @property (weak, nonatomic) IBOutlet UISwitch *settingShowUniqueSelectionItems;
+@property (weak, nonatomic) IBOutlet UISwitch *settingShowDatePicker;
 
 @end
 
@@ -272,7 +273,9 @@
         [alert addUniqueSelectionItemWithItem:item2];
         [alert addUniqueSelectionItemWithItem:item3];
     }
-    
+
+    alert.showDatePicker = self.settingShowDatePicker.isOn;
+
     if (alert.actions.count==0 &&
         titleText == nil &&
         descText == nil &&
