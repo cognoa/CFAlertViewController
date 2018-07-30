@@ -23,6 +23,9 @@ import UIKit
     @objc public var selectionItem: CFAlertSelectionItem? {
         didSet {
             titleLabel.text = selectionItem?.title
+            if let isSelected = selectionItem?.isSelected {
+                selectionButton.isSelected = isSelected
+            }
         }
     }
     
