@@ -20,6 +20,10 @@ import UIKit
     @objc func datePickerSelectionChanged(date: Date, datePicker: UIDatePicker)
 }
 
+@objc public protocol CFAlertViewControllerCustomPickerDelegate {
+    @objc func customPickerSelectedRow(row: Int, pickerView: UIPickerView)
+}
+
 open class CFAlertViewController: UIViewController    {
     
     // MARK: - Declarations
@@ -138,6 +142,8 @@ open class CFAlertViewController: UIViewController    {
             return self.actionList
         }
     }
+    
+    // MARK: Additional feature properties:
     @objc public var selectionItems = [CFAlertSelectionItem]()
     @objc public var selectionDelegate: CFAlertViewControllerSelectionDelegate?
     
@@ -146,6 +152,10 @@ open class CFAlertViewController: UIViewController    {
     
     @objc public var showDatePicker: Bool = false
     @objc public var datePickerDelegate: CFAlertViewControllerDatePickerDelegate?
+    
+    @objc public var showCustomPicker: Bool = false
+    @objc public var customPickerOptions = [String]()
+    @objc public var customPickerDelegate: CFAlertViewControllerCustomPickerDelegate?
     
     internal var _headerView : UIView?
     @objc public var headerView: UIView?  {
@@ -459,8 +469,12 @@ open class CFAlertViewController: UIViewController    {
         tableView?.register(selectionCellNib, forCellReuseIdentifier: CFAlertActionSelectionTableViewCell.identifier())
         let uniqueSelectionNib = UINib(nibName: CFAlertActionUniqueSelectionTableViewCell.identifier(), bundle: Bundle(for: CFAlertActionUniqueSelectionTableViewCell.self))
         tableView?.register(uniqueSelectionNib, forCellReuseIdentifier: CFAlertActionUniqueSelectionTableViewCell.identifier())
+
         let datePickerNib = UINib(nibName: CFAlertActionDatePickerViewTableViewCell.identifier(), bundle: Bundle(for: CFAlertActionDatePickerViewTableViewCell.self))
         tableView?.register(datePickerNib, forCellReuseIdentifier: CFAlertActionDatePickerViewTableViewCell.identifier())
+
+        let customPickerNib = UINib(nibName: CFAlertActionCustomPickerTableViewCell.identifier(), bundle: Bundle(for: CFAlertActionCustomPickerTableViewCell.self))
+        tableView?.register(customPickerNib, forCellReuseIdentifier: CFAlertActionCustomPickerTableViewCell.identifier())
         
         // Add Key Value Observer
         tableView?.addObserver(self, forKeyPath: "contentSize", options: [.new, .old, .prior], context: nil)
@@ -798,7 +812,7 @@ open class CFAlertViewController: UIViewController    {
 }
 
 
-extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFAlertActionTableViewCellDelegate, CFAlertActionSelectionTableViewCellDelegate, CFAlertActionUniqueSelectionTableViewCellDelegate, CFAlertActionDatePickerViewTableViewCellDelegate {
+extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFAlertActionTableViewCellDelegate, CFAlertActionSelectionTableViewCellDelegate, CFAlertActionUniqueSelectionTableViewCellDelegate, CFAlertActionDatePickerViewTableViewCellDelegate, CFAlertActionCustomPickerTableViewCellDelegate {
     
     // MARK: - UITableViewDataSource
     public func numberOfSections(in tableView: UITableView) -> Int {
@@ -827,6 +841,9 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
             return showDatePicker ? 1 : 0
             
         case 4:
+            return showCustomPicker ? 1: 0
+            
+        case 5:
             return self.actionList.count
             
         default:
@@ -871,11 +888,18 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
             uniqueSelectionCell?.selectionItem = uniqueSelectionItems[indexPath.row]
             uniqueSelectionCell?.delegate = self
             
-        case 3: cell = tableView.dequeueReusableCell(withIdentifier: CFAlertActionDatePickerViewTableViewCell.identifier())
+        case 3:
+            cell = tableView.dequeueReusableCell(withIdentifier: CFAlertActionDatePickerViewTableViewCell.identifier())
             let dateCell = cell as? CFAlertActionDatePickerViewTableViewCell
             dateCell?.delegate = self
             
         case 4:
+            cell = tableView.dequeueReusableCell(withIdentifier: CFAlertActionCustomPickerTableViewCell.identifier())
+            let pickerCell = cell as? CFAlertActionCustomPickerTableViewCell
+            pickerCell?.pickerViewOptions = customPickerOptions
+            pickerCell?.delegate = self
+            
+        case 5:
             // Get Action Cell Instance
             cell = tableView.dequeueReusableCell(withIdentifier: CFAlertActionTableViewCell.identifier())
             let actionCell: CFAlertActionTableViewCell? = (cell as? CFAlertActionTableViewCell)
@@ -967,6 +991,10 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
     
     public func datePickerCellDateSelected(cell: CFAlertActionDatePickerViewTableViewCell, date: Date, datePicker: UIDatePicker) {
         datePickerDelegate?.datePickerSelectionChanged(date: date, datePicker: datePicker)
+    }
+    
+    public func customPickerViewDidSelectRow(row: Int, pickerView: UIPickerView) {        
+        customPickerDelegate?.customPickerSelectedRow(row: row, pickerView: pickerView)
     }
 }
 

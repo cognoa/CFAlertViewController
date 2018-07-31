@@ -407,7 +407,7 @@
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="93Q-6o-TdO">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="93Q-6o-TdO">
                                                     <rect key="frame" x="311" y="6.5" width="51" height="31"/>
                                                 </switch>
                                             </subviews>
@@ -427,7 +427,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="N6q-Bp-EJ3">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="N6q-Bp-EJ3">
                                                     <rect key="frame" x="311" y="6.5" width="51" height="31"/>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Unique Selection Items" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Z8-Gk-8FT">
@@ -453,7 +453,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jr1-og-GQh">
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Jr1-og-GQh">
                                                     <rect key="frame" x="311" y="6.5" width="51" height="31"/>
                                                 </switch>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Date Picker" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mjd-Wx-RLL">
@@ -469,6 +469,32 @@
                                                 <constraint firstItem="Jr1-og-GQh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Mjd-Wx-RLL" secondAttribute="trailing" constant="20" id="Pi3-Yb-iqC"/>
                                                 <constraint firstItem="Jr1-og-GQh" firstAttribute="centerY" secondItem="ZgY-0k-kYT" secondAttribute="centerY" id="cXE-ya-eKb"/>
                                                 <constraint firstItem="Mjd-Wx-RLL" firstAttribute="centerY" secondItem="ZgY-0k-kYT" secondAttribute="centerY" id="glg-fk-hK1"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="AEl-Sw-8IU" userLabel="Custom Picker Cell">
+                                        <rect key="frame" x="0.0" y="1091.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AEl-Sw-8IU" id="FpA-2t-P34">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f3t-3J-5eq">
+                                                    <rect key="frame" x="311" y="6.5" width="51" height="31"/>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Custom Picker" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cwh-wN-hz0">
+                                                    <rect key="frame" x="15" y="11.5" width="158" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="cwh-wN-hz0" firstAttribute="centerY" secondItem="FpA-2t-P34" secondAttribute="centerY" id="IgN-Mx-kLt"/>
+                                                <constraint firstItem="f3t-3J-5eq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cwh-wN-hz0" secondAttribute="trailing" constant="20" id="RHz-la-spg"/>
+                                                <constraint firstItem="cwh-wN-hz0" firstAttribute="leading" secondItem="FpA-2t-P34" secondAttribute="leading" constant="15" id="dCL-FQ-Aik"/>
+                                                <constraint firstItem="f3t-3J-5eq" firstAttribute="centerY" secondItem="FpA-2t-P34" secondAttribute="centerY" id="nnC-x8-cAB"/>
+                                                <constraint firstAttribute="trailing" secondItem="f3t-3J-5eq" secondAttribute="trailing" constant="15" id="yqL-4R-TWX"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -506,6 +532,7 @@
                         <outlet property="settingAddFooterSwitch" destination="rWy-BH-Bui" id="foF-ew-MUr"/>
                         <outlet property="settingAddHeaderSwitch" destination="EQw-uE-p0m" id="1L2-Lb-5U8"/>
                         <outlet property="settingCloseOnBackgroundTapSwitch" destination="mgc-Y1-uDZ" id="pn7-Jw-F6A"/>
+                        <outlet property="settingShowCustomPicker" destination="f3t-3J-5eq" id="ODB-rV-89i"/>
                         <outlet property="settingShowDatePicker" destination="Jr1-og-GQh" id="Aec-MB-5iy"/>
                         <outlet property="settingShowSelectionItems" destination="93Q-6o-TdO" id="0tn-6p-c9h"/>
                         <outlet property="settingShowUniqueSelectionItems" destination="N6q-Bp-EJ3" id="8Qu-se-YmF"/>

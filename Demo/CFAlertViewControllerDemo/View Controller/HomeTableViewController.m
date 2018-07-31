@@ -68,6 +68,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *settingShowSelectionItems;
 @property (weak, nonatomic) IBOutlet UISwitch *settingShowUniqueSelectionItems;
 @property (weak, nonatomic) IBOutlet UISwitch *settingShowDatePicker;
+@property (weak, nonatomic) IBOutlet UISwitch *settingShowCustomPicker;
 
 @end
 
@@ -276,6 +277,14 @@
 
     alert.showDatePicker = self.settingShowDatePicker.isOn;
 
+    
+    if (self.settingShowCustomPicker.isOn) {
+        NSArray *pickerOptions = @[@"Option 1", @"Option 2", @"Option 3", @"Option 4", @"Option 5"];
+        alert.customPickerOptions = pickerOptions;
+    }
+    
+    alert.showCustomPicker = self.settingShowCustomPicker.isOn;
+    
     if (alert.actions.count==0 &&
         titleText == nil &&
         descText == nil &&
