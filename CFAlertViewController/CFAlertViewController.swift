@@ -218,6 +218,7 @@ open class CFAlertViewController: UIViewController    {
     internal var messageString: String?
     internal var messageColor: UIColor = CFAlertViewController.CF_ALERT_DEFAULT_MESSAGE_COLOR()
     internal var messageFont: UIFont?
+    internal var attributedMessage: NSAttributedString?
     internal var actionList = [CFAlertAction]()
     internal var dismissHandler: CFAlertViewControllerDismissBlock?
     internal var keyboardHeight: CGFloat = 0.0   {
@@ -475,6 +476,9 @@ open class CFAlertViewController: UIViewController    {
 
         let customPickerNib = UINib(nibName: CFAlertActionCustomPickerTableViewCell.identifier(), bundle: Bundle(for: CFAlertActionCustomPickerTableViewCell.self))
         tableView?.register(customPickerNib, forCellReuseIdentifier: CFAlertActionCustomPickerTableViewCell.identifier())
+
+        let attributedNib = UINib(nibName: CFAlertActionAttributedStringCellTableViewCell.identifier(), bundle: Bundle(for: CFAlertActionAttributedStringCellTableViewCell.self))
+        tableView?.register(attributedNib, forCellReuseIdentifier: CFAlertActionAttributedStringCellTableViewCell.identifier())
         
         // Add Key Value Observer
         tableView?.addObserver(self, forKeyPath: "contentSize", options: [.new, .old, .prior], context: nil)
@@ -816,7 +820,7 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
     
     // MARK: - UITableViewDataSource
     public func numberOfSections(in tableView: UITableView) -> Int {
-        return 6
+        return 7
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -830,20 +834,23 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
             if let messageString = self.messageString, !messageString.isEmpty  {
                 return 1
             }
-            
         case 1:
+            if let attributedMessage = self.attributedMessage {
+                return 1
+            }
+        case 2:
             return selectionItems.count
             
-        case 2:
+        case 3:
             return uniqueSelectionItems.count
             
-        case 3:
+        case 4:
             return showDatePicker ? 1 : 0
             
-        case 4:
+        case 5:
             return showCustomPicker ? 1: 0
             
-        case 5:
+        case 6:
             return self.actionList.count
             
         default:
@@ -874,32 +881,37 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
             } else {
                 titleSubtitleCell?.contentBottomMargin = 0.0
             }
-            
+        
         case 1:
+            cell = tableView.dequeueReusableCell(withIdentifier: CFAlertActionAttributedStringCellTableViewCell.identifier())
+            let attributedCell = cell as? CFAlertActionAttributedStringCellTableViewCell
+            attributedCell?.attributedTitle = self.attributedMessage
+            
+        case 2:
             cell = tableView.dequeueReusableCell(withIdentifier: CFAlertActionSelectionTableViewCell.identifier())
             let selectionCell: CFAlertActionSelectionTableViewCell? = (cell as? CFAlertActionSelectionTableViewCell)
             selectionCell?.selectionItem = selectionItems[indexPath.row]
             selectionCell?.delegate = self
             selectionCell?.topSeparatorView.isHidden = indexPath.row == 0 ? false : true
             
-        case 2:
+        case 3:
             cell = tableView.dequeueReusableCell(withIdentifier: CFAlertActionUniqueSelectionTableViewCell.identifier())
             let uniqueSelectionCell: CFAlertActionUniqueSelectionTableViewCell? = cell as? CFAlertActionUniqueSelectionTableViewCell
             uniqueSelectionCell?.selectionItem = uniqueSelectionItems[indexPath.row]
             uniqueSelectionCell?.delegate = self
             
-        case 3:
+        case 4:
             cell = tableView.dequeueReusableCell(withIdentifier: CFAlertActionDatePickerViewTableViewCell.identifier())
             let dateCell = cell as? CFAlertActionDatePickerViewTableViewCell
             dateCell?.delegate = self
             
-        case 4:
+        case 5:
             cell = tableView.dequeueReusableCell(withIdentifier: CFAlertActionCustomPickerTableViewCell.identifier())
             let pickerCell = cell as? CFAlertActionCustomPickerTableViewCell
             pickerCell?.pickerViewOptions = customPickerOptions
             pickerCell?.delegate = self
             
-        case 5:
+        case 6:
             // Get Action Cell Instance
             cell = tableView.dequeueReusableCell(withIdentifier: CFAlertActionTableViewCell.identifier())
             let actionCell: CFAlertActionTableViewCell? = (cell as? CFAlertActionTableViewCell)
