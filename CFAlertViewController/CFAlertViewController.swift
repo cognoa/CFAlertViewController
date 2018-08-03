@@ -144,6 +144,7 @@ open class CFAlertViewController: UIViewController    {
     }
     
     // MARK: Additional feature properties:
+    @objc public var attributedMessage: NSAttributedString?
     @objc public var selectionItems = [CFAlertSelectionItem]()
     @objc public var selectionDelegate: CFAlertViewControllerSelectionDelegate?
     
@@ -218,7 +219,6 @@ open class CFAlertViewController: UIViewController    {
     internal var messageString: String?
     internal var messageColor: UIColor = CFAlertViewController.CF_ALERT_DEFAULT_MESSAGE_COLOR()
     internal var messageFont: UIFont?
-    internal var attributedMessage: NSAttributedString?
     internal var actionList = [CFAlertAction]()
     internal var dismissHandler: CFAlertViewControllerDismissBlock?
     internal var keyboardHeight: CGFloat = 0.0   {
