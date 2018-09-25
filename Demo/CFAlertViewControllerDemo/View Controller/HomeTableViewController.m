@@ -69,6 +69,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *settingShowUniqueSelectionItems;
 @property (weak, nonatomic) IBOutlet UISwitch *settingShowDatePicker;
 @property (weak, nonatomic) IBOutlet UISwitch *settingShowCustomPicker;
+@property (weak, nonatomic) IBOutlet UISwitch *settingShowAttributedMessage;
 
 @end
 
@@ -284,6 +285,10 @@
     }
     
     alert.showCustomPicker = self.settingShowCustomPicker.isOn;
+    
+    if (self.settingShowAttributedMessage.isOn) {
+        alert.attributedMessage = [[NSAttributedString alloc] initWithString:@"This is a test string to test whether the label words wraps"];
+    }
     
     if (alert.actions.count==0 &&
         titleText == nil &&

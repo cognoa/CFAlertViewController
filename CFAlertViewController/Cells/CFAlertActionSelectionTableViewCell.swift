@@ -39,6 +39,7 @@ import UIKit
     public override func awakeFromNib() {
         super.awakeFromNib()
         basicInitialisation()
+        
     }
     
     public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -59,7 +60,7 @@ import UIKit
     }
     
     internal func basicInitialisation() {
-        let defaultImage = UIImage(named: "check-box-default")
+        let defaultImage = UIImage(named: "check-box-inactive")
         selectionButton.setBackgroundImage(defaultImage, for: .normal)
         let selectedImage = UIImage(named: "check-box-active")
         selectionButton.setBackgroundImage(selectedImage, for: .selected)

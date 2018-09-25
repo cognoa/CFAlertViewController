@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14269.14" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bUg-IY-tHd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bUg-IY-tHd">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14252.5"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -277,7 +277,7 @@
                                         <rect key="frame" x="0.0" y="727.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="S9J-ab-Iwg" id="81n-GE-1et">
-                                            <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="349" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Color" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XuR-o1-oXg">
@@ -498,6 +498,32 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="zH4-gk-E8q" userLabel="Show Attributed Message Cell">
+                                        <rect key="frame" x="0.0" y="1135.5" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zH4-gk-E8q" id="sBG-H1-JZt">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j43-oN-FMB">
+                                                    <rect key="frame" x="311" y="6.5" width="51" height="31"/>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show Attributed Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ctl-z1-r3b">
+                                                    <rect key="frame" x="15" y="11.5" width="197" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="j43-oN-FMB" secondAttribute="trailing" constant="15" id="Gr5-Pd-e3B"/>
+                                                <constraint firstItem="j43-oN-FMB" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ctl-z1-r3b" secondAttribute="trailing" constant="20" id="fnf-Bf-6KX"/>
+                                                <constraint firstItem="Ctl-z1-r3b" firstAttribute="leading" secondItem="sBG-H1-JZt" secondAttribute="leading" constant="15" id="tx6-9T-uqE"/>
+                                                <constraint firstItem="j43-oN-FMB" firstAttribute="centerY" secondItem="sBG-H1-JZt" secondAttribute="centerY" id="yVE-j5-rHT"/>
+                                                <constraint firstItem="Ctl-z1-r3b" firstAttribute="centerY" secondItem="sBG-H1-JZt" secondAttribute="centerY" id="zau-4Y-fhp"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -532,6 +558,7 @@
                         <outlet property="settingAddFooterSwitch" destination="rWy-BH-Bui" id="foF-ew-MUr"/>
                         <outlet property="settingAddHeaderSwitch" destination="EQw-uE-p0m" id="1L2-Lb-5U8"/>
                         <outlet property="settingCloseOnBackgroundTapSwitch" destination="mgc-Y1-uDZ" id="pn7-Jw-F6A"/>
+                        <outlet property="settingShowAttributedMessage" destination="j43-oN-FMB" id="Q2u-V6-Uex"/>
                         <outlet property="settingShowCustomPicker" destination="f3t-3J-5eq" id="ODB-rV-89i"/>
                         <outlet property="settingShowDatePicker" destination="Jr1-og-GQh" id="Aec-MB-5iy"/>
                         <outlet property="settingShowSelectionItems" destination="93Q-6o-TdO" id="0tn-6p-c9h"/>
@@ -542,7 +569,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gM1-z3-DfD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1098" y="92"/>
+            <point key="canvasLocation" x="1087" y="134"/>
         </scene>
         <!--Color Picker Table View Controller-->
         <scene sceneID="dHX-cp-P2p">
@@ -724,7 +751,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9gT-2N-eVZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1906" y="116"/>
+            <point key="canvasLocation" x="1878" y="134"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="S38-L3-d9k">
