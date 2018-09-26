@@ -60,7 +60,7 @@ import UIKit
     }
     
     internal func basicInitialisation() {
-        let defaultImage = UIImage(named: "check-box-inactive")
+        let defaultImage = UIImage(named: "test-inactive")
         selectionButton.setBackgroundImage(defaultImage, for: .normal)
         let selectedImage = UIImage(named: "check-box-active")
         selectionButton.setBackgroundImage(selectedImage, for: .selected)
