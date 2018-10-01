@@ -21,7 +21,8 @@ public class CFAlertActionDatePickerViewTableViewCell: UITableViewCell {
     }
     
     override public func awakeFromNib() {
-        super.awakeFromNib()    
+        super.awakeFromNib()
+        datePickerView.maximumDate = Date()
     }
 
     override public func setSelected(_ selected: Bool, animated: Bool) {
