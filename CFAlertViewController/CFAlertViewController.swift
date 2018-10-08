@@ -152,6 +152,7 @@ open class CFAlertViewController: UIViewController    {
     @objc public var uniqueSelectionDelegate: CFAlertViewControllerUniqueSelectionDelegate?
     
     @objc public var showDatePicker: Bool = false
+    @objc public var datePickerDisplayDate: Date?
     @objc public var datePickerDelegate: CFAlertViewControllerDatePickerDelegate?
     
     @objc public var showCustomPicker: Bool = false
@@ -903,8 +904,11 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
         case 4:
             cell = tableView.dequeueReusableCell(withIdentifier: CFAlertActionDatePickerViewTableViewCell.identifier())
             let dateCell = cell as? CFAlertActionDatePickerViewTableViewCell
+            if let pickerDate = datePickerDisplayDate {
+                dateCell?.datePickerView.date = pickerDate
+            }
             dateCell?.delegate = self
-            
+
         case 5:
             cell = tableView.dequeueReusableCell(withIdentifier: CFAlertActionCustomPickerTableViewCell.identifier())
             let pickerCell = cell as? CFAlertActionCustomPickerTableViewCell
