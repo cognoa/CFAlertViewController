@@ -127,7 +127,7 @@ public class CFAlertActionTableViewCell: UITableViewCell {
                     actionButtonCenterXConstraint?.isActive = false
                     actionButtonTrailingConstraint?.priority = UILayoutPriority(rawValue: 751.0)
                     // Set Content Edge Inset
-                    actionButton?.contentEdgeInsets = UIEdgeInsetsMake(12.0, 20.0, 12.0, 20.0)
+                    actionButton?.contentEdgeInsets = UIEdgeInsets.init(top: 12.0, left: 20.0, bottom: 12.0, right: 20.0)
                     
                 case .left:
                     // Left Align
@@ -135,7 +135,7 @@ public class CFAlertActionTableViewCell: UITableViewCell {
                     actionButtonCenterXConstraint?.isActive = false
                     actionButtonTrailingConstraint?.priority = UILayoutPriority(rawValue: 749.0)
                     // Set Content Edge Inset
-                    actionButton?.contentEdgeInsets = UIEdgeInsetsMake(12.0, 20.0, 12.0, 20.0)
+                    actionButton?.contentEdgeInsets = UIEdgeInsets.init(top: 12.0, left: 20.0, bottom: 12.0, right: 20.0)
                     
                 case .center:
                     // Center Align
@@ -143,7 +143,7 @@ public class CFAlertActionTableViewCell: UITableViewCell {
                     actionButtonCenterXConstraint?.isActive = true
                     actionButtonTrailingConstraint?.priority = UILayoutPriority(rawValue: 750.0)
                     // Set Content Edge Inset
-                    actionButton?.contentEdgeInsets = UIEdgeInsetsMake(12.0, 20.0, 12.0, 20.0)
+                    actionButton?.contentEdgeInsets = UIEdgeInsets.init(top: 12.0, left: 20.0, bottom: 12.0, right: 20.0)
                     
                 default:
                     // Justified Align
@@ -151,7 +151,7 @@ public class CFAlertActionTableViewCell: UITableViewCell {
                     actionButtonCenterXConstraint?.isActive = false
                     actionButtonTrailingConstraint?.priority = UILayoutPriority(rawValue: 751.0)
                     // Set Content Edge Inset
-                    actionButton?.contentEdgeInsets = UIEdgeInsetsMake(15.0, 20.0, 15.0, 20.0)
+                    actionButton?.contentEdgeInsets = UIEdgeInsets.init(top: 15.0, left: 20.0, bottom: 15.0, right: 20.0)
                 }
                 
                 // Set Title
@@ -182,7 +182,7 @@ public class CFAlertActionTableViewCell: UITableViewCell {
         basicInitialisation()
     }
     
-    public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         // Initialization code
         basicInitialisation()
