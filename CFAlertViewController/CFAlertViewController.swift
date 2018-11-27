@@ -835,7 +835,7 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
                 return 1
             }
         case 1:
-            if let attributedMessage = self.attributedMessage {
+            if self.attributedMessage != nil {
                 return 1
             }
         case 2:
