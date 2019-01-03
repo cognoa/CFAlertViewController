@@ -23,6 +23,7 @@ import UIKit
     @objc public var selectionItem: CFAlertSelectionItem? {
         didSet {
             titleLabel.text = selectionItem?.title
+            selectionButton.accessibilityLabel = selectionItem?.title
             if let isSelected = selectionItem?.isSelected {
                 selectionButton.isSelected = isSelected
             }
@@ -60,6 +61,8 @@ import UIKit
     }
     
     internal func basicInitialisation() {
+        titleLabel.isAccessibilityElement = false
+
         let defaultImage = UIImage(named: "check-box-default")
         selectionButton.setBackgroundImage(defaultImage, for: .normal)
         let selectedImage = UIImage(named: "check-box-active")
