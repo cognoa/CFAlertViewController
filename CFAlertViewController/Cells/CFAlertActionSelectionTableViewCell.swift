@@ -63,9 +63,10 @@ import UIKit
     internal func basicInitialisation() {
         titleLabel.isAccessibilityElement = false
 
-        let defaultImage = UIImage(named: "CognoaAlert-check-box-default")
+        guard let bundle = Bundle.getResourcesBundle() else { return }
+        let defaultImage = UIImage(named: "CFAlert-check-box-inactive", in: bundle, compatibleWith: nil)
         selectionButton.setBackgroundImage(defaultImage, for: .normal)
-        let selectedImage = UIImage(named: "CognoaAlert-check-box-active")
+        let selectedImage = UIImage(named: "CFAlert-check-box-active", in: bundle, compatibleWith: nil)
         selectionButton.setBackgroundImage(selectedImage, for: .selected)
     }
     

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import os.log
 
 @objc public protocol CFAlertViewControllerSelectionDelegate {
     @objc func selectionItemChanged(selectionItems: [CFAlertSelectionItem], at indexPath: IndexPath, selected: Bool)
@@ -1044,3 +1045,23 @@ extension NSObject  {
 }
 
 
+extension Bundle {
+    static func getResourcesBundle() -> Bundle? {
+        let bundle = Bundle(for: CFAlertViewController.self)
+        let bundleName = "CFAlertViewResources"
+        let bundleNameWithExt = bundleName + ".bundle"
+        let newURL = bundle.resourceURL?.appendingPathComponent(bundleNameWithExt, isDirectory: true)
+        guard
+            let resourcesBundleUrl = newURL,
+            let resourcesBundle = Bundle(url: resourcesBundleUrl) else {
+                let path = newURL?.absoluteString ?? "nil"
+                if #available(iOS 10.0, *) {
+                    os_log("Could Not find bundle %@ in bundle %@", type: .debug, bundleName, path)
+                } else {
+                    print("Could Not find bundle \(bundleName) in bundle \(path)")
+                }
+                return nil
+        }
+        return resourcesBundle
+    }
+}

@@ -79,7 +79,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/Codigami/CFAlertViewController.git", :tag => "v3.1" }
+  s.source       = { :git => "https://github.com/cognoa/CFAlertViewController.git", :tag => "v3.1" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -103,6 +103,9 @@ Pod::Spec.new do |s|
 
   # s.resource  = "icon.png"
   s.resources = "CFAlertViewController/*.xib", "CFAlertViewController/**/*.xib"
+	s.resource_bundles = {
+    'CFAlertViewResources' => ['CFAlertViewController/Images/*.png']
+  }
 
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
 
