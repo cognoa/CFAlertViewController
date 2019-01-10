@@ -25,6 +25,56 @@ import os.log
     @objc func customPickerSelectedRow(row: Int, pickerView: UIPickerView)
 }
 
+@objc public class CFAlertViewImages: NSObject {
+
+    /// All images needed to populate the custom UI used by CFAlertViewController
+    ///
+    /// - Note:
+    ///    Any future images needed for new cells added to CFAlertViewController should be added to this initializer
+    ///
+    /// - Parameters:
+    ///   - checkBoxActive: Image of a checkbox (without a check)
+    ///   - checkBoxInactive: Image of a checked checkbox
+    ///   - uniqueSelectionDeselected: Image of an unselected radio button
+    ///   - uniqueSelectionSelected: Image of a selected radio button
+    @objc public init(  checkBoxActive: UIImage,
+                        checkBoxInactive: UIImage,
+                        uniqueSelectionDeselected: UIImage,
+                        uniqueSelectionSelected: UIImage) {
+        self.checkBoxActive = checkBoxActive
+        self.checkBoxInactive = checkBoxInactive
+        self.uniqueSelectionDeselected = uniqueSelectionDeselected
+        self.uniqueSelectionSelected = uniqueSelectionSelected
+    }
+
+    /// Images needed to populate the custom UI used for a CFAlertSelectionItem only
+    ///
+    /// - Parameters:
+    ///   - checkBoxActive: Image of a checkbox (without a check)
+    ///   - checkBoxInactive: Image of a checked checkbox
+    @objc public init(checkBoxActive: UIImage,
+                      checkBoxInactive: UIImage) {
+        self.checkBoxActive = checkBoxActive
+        self.checkBoxInactive = checkBoxInactive
+    }
+
+    /// Images needed to populate the custom UI used for a CFAlertUniqueSelectionItem only
+    ///
+    /// - Parameters:
+    ///   - uniqueSelectionDeselected: Image of an unselected radio button
+    ///   - uniqueSelectionSelected: Image of a selected radio button
+    @objc public init(uniqueSelectionDeselected: UIImage,
+                      uniqueSelectionSelected: UIImage) {
+        self.uniqueSelectionDeselected = uniqueSelectionDeselected
+        self.uniqueSelectionSelected = uniqueSelectionSelected
+    }
+
+    internal var checkBoxActive: UIImage?
+    internal var checkBoxInactive: UIImage?
+    internal var uniqueSelectionDeselected: UIImage?
+    internal var uniqueSelectionSelected: UIImage?
+}
+
 open class CFAlertViewController: UIViewController    {
     
     // MARK: - Declarations
@@ -213,6 +263,9 @@ open class CFAlertViewController: UIViewController    {
     // The view which holds the popup UI
     // You can change corner radius or background color of this view for additional customisation
     @objc @IBOutlet public weak var containerView: UIView?
+
+    @objc public var images: CFAlertViewImages?
+
     
     // MARK: Private / Internal
     internal var titleString: String?
@@ -245,7 +298,7 @@ open class CFAlertViewController: UIViewController    {
     // View Controller Interactive Transitioning Delegate
     internal var transitionDelegate : UIViewControllerTransitioningDelegate?
     internal var interactiveTransitionDelegate : CFAlertBaseInteractiveTransition?
-    
+
     @IBOutlet internal weak var mainViewTopConstraint: NSLayoutConstraint?
     @IBOutlet internal weak var mainViewBottomConstraint: NSLayoutConstraint?
     @IBOutlet internal weak var tableView: UITableView?
@@ -265,6 +318,7 @@ open class CFAlertViewController: UIViewController    {
                                             message: String?,
                                             textAlignment: NSTextAlignment,
                                             preferredStyle: CFAlertControllerStyle,
+                                            images: CFAlertViewImages? = nil,
                                             didDismissAlertHandler dismiss: CFAlertViewControllerDismissBlock?) -> CFAlertViewController {
         
         return CFAlertViewController.alertController(title: title,
@@ -277,6 +331,7 @@ open class CFAlertViewController: UIViewController    {
                                                      preferredStyle: preferredStyle,
                                                      headerView: nil,
                                                      footerView: nil,
+                                                     images: images,
                                                      didDismissAlertHandler: dismiss)
     }
     
@@ -288,6 +343,7 @@ open class CFAlertViewController: UIViewController    {
                                             preferredStyle: CFAlertControllerStyle,
                                             headerView: UIView?,
                                             footerView: UIView?,
+                                            images: CFAlertViewImages? = nil,
                                             didDismissAlertHandler dismiss: CFAlertViewControllerDismissBlock?) -> CFAlertViewController {
         
         // Create New Instance Of Alert Controller
@@ -301,6 +357,7 @@ open class CFAlertViewController: UIViewController    {
                                           preferredStyle: preferredStyle,
                                           headerView: headerView,
                                           footerView: footerView,
+                                          images: images,
                                           didDismissAlertHandler: dismiss)
     }
     
@@ -314,6 +371,7 @@ open class CFAlertViewController: UIViewController    {
                                             preferredStyle: CFAlertControllerStyle,
                                             headerView: UIView?,
                                             footerView: UIView?,
+                                            images: CFAlertViewImages? = nil,
                                             didDismissAlertHandler dismiss: CFAlertViewControllerDismissBlock?) -> CFAlertViewController {
 
         // Create New Instance Of Alert Controller
@@ -327,6 +385,7 @@ open class CFAlertViewController: UIViewController    {
                                           preferredStyle: preferredStyle,
                                           headerView: headerView,
                                           footerView: footerView,
+                                          images: images,
                                           didDismissAlertHandler: dismiss)
     }
 
@@ -342,6 +401,7 @@ open class CFAlertViewController: UIViewController    {
                                   message: String?,
                                   textAlignment: NSTextAlignment,
                                   preferredStyle: CFAlertControllerStyle,
+                                  images: CFAlertViewImages? = nil,
                                   didDismissAlertHandler dismiss: CFAlertViewControllerDismissBlock?) {
         
         // Create New Instance Of Alert Controller
@@ -355,6 +415,7 @@ open class CFAlertViewController: UIViewController    {
                   preferredStyle: preferredStyle,
                   headerView: nil,
                   footerView: nil,
+                  images: images,
                   didDismissAlertHandler: dismiss)
     }
     
@@ -366,6 +427,7 @@ open class CFAlertViewController: UIViewController    {
                                   preferredStyle: CFAlertControllerStyle,
                                   headerView: UIView?,
                                   footerView: UIView?,
+                                  images: CFAlertViewImages? = nil,
                                   didDismissAlertHandler dismiss: CFAlertViewControllerDismissBlock?) {
         self.init(title: title,
                   titleColor: titleColor,
@@ -377,6 +439,7 @@ open class CFAlertViewController: UIViewController    {
                   preferredStyle: preferredStyle,
                   headerView: nil,
                   footerView: nil,
+                  images: images,
                   didDismissAlertHandler: dismiss)
     }
 
@@ -390,6 +453,7 @@ open class CFAlertViewController: UIViewController    {
                              preferredStyle: CFAlertControllerStyle,
                              headerView: UIView?,
                              footerView: UIView?,
+                             images: CFAlertViewImages? = nil,
                              didDismissAlertHandler dismiss: CFAlertViewControllerDismissBlock?) {
         // Get Current Bundle
         let bundle = Bundle(for: CFAlertViewController.self)
@@ -894,13 +958,15 @@ extension CFAlertViewController: UITableViewDataSource, UITableViewDelegate, CFA
             selectionCell?.selectionItem = selectionItems[indexPath.row]
             selectionCell?.delegate = self
             selectionCell?.topSeparatorView.isHidden = indexPath.row == 0 ? false : true
+            selectionCell?.assignImages(images: images)
             
         case 3:
             cell = tableView.dequeueReusableCell(withIdentifier: CFAlertActionUniqueSelectionTableViewCell.identifier())
             let uniqueSelectionCell: CFAlertActionUniqueSelectionTableViewCell? = cell as? CFAlertActionUniqueSelectionTableViewCell
             uniqueSelectionCell?.selectionItem = uniqueSelectionItems[indexPath.row]
             uniqueSelectionCell?.delegate = self
-            
+            uniqueSelectionCell?.assignImages(images: images)
+
         case 4:
             cell = tableView.dequeueReusableCell(withIdentifier: CFAlertActionDatePickerViewTableViewCell.identifier())
             let dateCell = cell as? CFAlertActionDatePickerViewTableViewCell

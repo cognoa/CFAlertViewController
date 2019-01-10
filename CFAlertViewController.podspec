@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CFAlertViewController"
-  s.version      = "3.1"
+  s.version      = "3.2"
   s.summary      = "CFAlertViewController is a library that helps you display and customise alerts and action sheets on iPad and iPhone."
 
   # This description is used to generate tags and improve search results.
@@ -103,10 +103,6 @@ Pod::Spec.new do |s|
 
   # s.resource  = "icon.png"
   s.resources = "CFAlertViewController/*.xib", "CFAlertViewController/**/*.xib"
-
-	s.resource_bundles = {
-    'CFAlertViewController' => ['CFAlertViewController/Images/*.png']
-  }
 
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
 

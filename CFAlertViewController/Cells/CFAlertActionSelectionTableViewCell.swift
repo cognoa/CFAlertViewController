@@ -62,12 +62,11 @@ import UIKit
     
     internal func basicInitialisation() {
         titleLabel.isAccessibilityElement = false
+    }
 
-        guard let bundle = Bundle.getResourcesBundle() else { return }
-        let defaultImage = UIImage(named: "CFAlert-check-box-inactive", in: bundle, compatibleWith: nil)
-        selectionButton.setBackgroundImage(defaultImage, for: .normal)
-        let selectedImage = UIImage(named: "CFAlert-check-box-active", in: bundle, compatibleWith: nil)
-        selectionButton.setBackgroundImage(selectedImage, for: .selected)
+    internal func assignImages(images: CFAlertViewImages?) {
+        selectionButton.setBackgroundImage(images?.checkBoxInactive, for: .normal)
+        selectionButton.setBackgroundImage(images?.checkBoxActive, for: .selected)
     }
     
     @IBAction func selectionButtonPressed(_ sender: Any) {
