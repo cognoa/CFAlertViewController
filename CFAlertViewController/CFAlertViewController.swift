@@ -1048,7 +1048,7 @@ extension NSObject  {
 extension Bundle {
     static func getResourcesBundle() -> Bundle? {
         let bundle = Bundle(for: CFAlertViewController.self)
-        let bundleName = "CFAlertViewResources"
+        let bundleName = "CFAlertViewController"
         let bundleNameWithExt = bundleName + ".bundle"
         let newURL = bundle.resourceURL?.appendingPathComponent(bundleNameWithExt, isDirectory: true)
         guard

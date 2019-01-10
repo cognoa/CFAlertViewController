@@ -64,7 +64,7 @@ Pod::Spec.new do |s|
   #
 
   # s.platform     = :ios
-  s.platform     = :ios, "9.0"
+  s.platform     = :ios, "10.0"
 
   #  When using multiple platforms
   # s.ios.deployment_target = "5.0"
@@ -103,8 +103,9 @@ Pod::Spec.new do |s|
 
   # s.resource  = "icon.png"
   s.resources = "CFAlertViewController/*.xib", "CFAlertViewController/**/*.xib"
+
 	s.resource_bundles = {
-    'CFAlertViewResources' => ['CFAlertViewController/Images/*.png']
+    'CFAlertViewController' => ['CFAlertViewController/Images/*.png']
   }
 
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
